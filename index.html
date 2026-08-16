@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js"></script>
+<script src="./assets/support.js"></script>
 </head>
 <body>
 <x-dc>
@@ -30,7 +30,7 @@
   <div style="max-width: 1220px; margin: 0 auto; padding: 0 24px; display: flex; flex-direction: column; gap: 90px;">
 
     <div style="display: flex; flex-direction: row; justify-content: space-between; align-items: flex-start; gap: 10px; height: 48px;">
-      <img src="logo-orange.svg" alt="Poll App" width="150" height="70" style="display: block; width: 150px; height: 70px;">
+      <img src="assets/img/logo-orange.svg" alt="Poll App" width="150" height="70" style="display: block; width: 150px; height: 70px;">
     </div>
 
     <div style="display: flex; align-items: flex-start; gap: 32px; flex-wrap: wrap;">
@@ -42,13 +42,13 @@
         <button type="button" onClick="{{ openCreate }}" onMouseEnter="{{ btn.heroEnter }}" onMouseLeave="{{ btn.leave }}" style="{{ btn.heroStyle }}"><span>New survey</span><span style="{{ btn.heroIconStyle }}">+</span></button>
       </div>
       <div onMouseEnter="{{ heroEnter }}" onMouseLeave="{{ heroLeave }}" style="position: relative; width: 426px; height: 420px; flex: none; display: flex; align-items: center; justify-content: center;">
-        <img src="hero-visual.png" alt="Survey illustration" style="{{ heroStyle }}">
-        <img src="typing-bubble.svg" alt="" style="{{ heroBubbleStyle }}">
-        <img src="check.svg" alt="" style="{{ heroCheckStyle }}">
+        <img src="assets/img/hero-visual.png" alt="Survey illustration" style="{{ heroStyle }}">
+        <img src="assets/img/typing-bubble.svg" alt="" style="{{ heroBubbleStyle }}">
+        <img src="assets/img/check.svg" alt="" style="{{ heroCheckStyle }}">
         <div style="position: absolute; z-index: 2; left: 46px; top: 306px; width: 80px; height: 80px; border-radius: 50%; background: #35273A; pointer-events: none;"></div>
         <div style="position: absolute; z-index: 2; left: 311px; top: 11px; width: 73px; height: 73px; border-radius: 50%; background: #35273A; pointer-events: none;"></div>
-        <img src="star.svg" alt="" style="{{ heroStarStyle }}">
-        <img src="question-mark.svg" alt="" style="{{ heroQuestionStyle }}">
+        <img src="assets/img/star.svg" alt="" style="{{ heroStarStyle }}">
+        <img src="assets/img/question-mark.svg" alt="" style="{{ heroQuestionStyle }}">
       </div>
     </div>
 
@@ -114,7 +114,7 @@
 
         <sc-if value="{{ listEmpty }}" hint-placeholder-val="{{ false }}">
           <div style="padding: 48px; display: flex; flex-direction: column; align-items: center; gap: 16px; color: #C7B4DC; font-size: 18px;">
-            <img src="question-mark.svg" alt="" width="72" height="82" style="display: block; width: 72px; height: 82px;">
+            <img src="assets/img/question-mark.svg" alt="" width="72" height="82" style="display: block; width: 72px; height: 82px;">
             <span>No surveys in this category.</span>
           </div>
         </sc-if>
@@ -124,7 +124,7 @@
 
   <sc-if value="{{ toast }}" hint-placeholder-val="{{ false }}">
     <div style="position: fixed; z-index: 60; right: 40px; bottom: 40px; display: flex; flex-direction: row; align-items: center; gap: 16px; width: 357px; min-height: 86px; padding: 14px 26px; background: #FEE9D4; border-radius: 5px 50px 5px 5px; box-shadow: 0 12px 30px rgba(20,10,26,0.25); animation: pollRise .24s ease;">
-      <img src="check.svg" alt="" width="48" height="49" style="flex: none; display: block; width: 48px; height: 49px;">
+      <img src="assets/img/check.svg" alt="" width="48" height="49" style="flex: none; display: block; width: 48px; height: 49px;">
       <span style="flex: 1 1 auto; font-family: 'Nerko One', cursive; font-weight: 400; font-size: 24px; line-height: 29px; letter-spacing: 0.02em; color: #35273A;">{{ toast }}</span>
       <button type="button" onClick="{{ closeToast }}" aria-label="Close" style="flex: none; border: none; cursor: pointer; background: transparent; width: 24px; height: 24px; font-size: 18px; line-height: 1; color: #35273A;">✕</button>
     </div>
@@ -133,7 +133,7 @@
   <sc-if value="{{ detail }}" hint-placeholder-val="{{ false }}">
     <div style="position: fixed; inset: 0; z-index: 40; background: #FEFDFF; overflow-x: hidden; overflow-y: auto; overscroll-behavior: contain; animation: pollFadeIn .2s ease; font-family: 'Mulish', sans-serif; padding: 47px 0 80px;">
       <div style="width: 1218px; max-width: calc(100% - 48px); margin: 0 auto 37px; display: flex; flex-direction: row; justify-content: space-between; align-items: flex-start; gap: 10px; height: 48px;">
-        <img src="logo.svg" alt="Poll App" role="button" tabindex="0" onClick="{{ closeDetail }}" width="119" height="50" style="display: block; width: 119px; height: 50px; cursor: pointer;">
+        <img src="assets/img/logo.svg" alt="Poll App" role="button" tabindex="0" onClick="{{ closeDetail }}" width="119" height="50" style="display: block; width: 119px; height: 50px; cursor: pointer;">
         <button type="button" onClick="{{ openCreate }}" onMouseEnter="{{ btn.detailEnter }}" onMouseLeave="{{ btn.leave }}" style="{{ btn.detailStyle }}"><span>Create survey</span><span style="{{ btn.detailIconStyle }}">+</span></button>
       </div>
       <div style="width: 1059px; max-width: calc(100% - 48px); margin: 0 auto; display: flex; flex-direction: row; align-items: flex-start; gap: 42px; animation: pollRise .24s ease;">
@@ -190,7 +190,7 @@
             <div style="display: flex; flex-direction: column; justify-content: center; align-items: flex-start; gap: 146px; width: 315px; font-weight: 700; font-size: 18px; line-height: 23px; color: #35273A;">
               <div style="width: 315px;">Results will be shown here after participants complete the survey.</div>
               <div style="display: flex; flex-direction: column; align-items: center; gap: 16px; width: 315px;">
-                <img src="typing-bubble.svg" alt="" width="158" height="114" style="display: block; width: 158px; height: 114px;">
+                <img src="assets/img/typing-bubble.svg" alt="" width="158" height="114" style="display: block; width: 158px; height: 114px;">
                 <div style="width: 315px; text-align: center;">There are no answears yet.</div>
               </div>
             </div>
