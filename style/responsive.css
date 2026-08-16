@@ -1,4 +1,4 @@
-/* Breakpoints: tablet (1024px), small tablet (768px) and phone (520px). */
+/* Breakpoints: tablet (1024px), mobile (768px) and small phone (400px). */
 
 @media (max-width: 1024px) {
   h1 {
@@ -11,15 +11,6 @@
 
   .hero {
     gap: var(--space-md);
-  }
-
-  /* The illustration is scaled down; the negative margins remove the space
-     the untransformed box would otherwise still occupy. */
-  .hero-visual {
-    flex: 0 0 320px;
-    transform: scale(0.76);
-    transform-origin: top left;
-    margin: 0 -101px -101px 0;
   }
 
   .detail-body {
@@ -37,25 +28,82 @@
   }
 }
 
+/* Mobile: alles untereinander, Reihenfolge Logo, Headline, Illustration,
+   Text, Button. Werte aus dem Design: Inhaltsbreite 343px bei 375px Screen. */
 @media (max-width: 768px) {
   body {
     padding: 24px 0 80px;
   }
 
-  h1 {
-    font-size: 40px;
-  }
-
-  h2 {
-    font-size: 36px;
+  .page-header,
+  main {
+    padding: 0 16px;
   }
 
   .page-header {
-    margin-bottom: var(--space-lg);
+    margin-bottom: 54px;
+  }
+
+  .logo-link img {
+    width: 119px;
+    height: auto;
   }
 
   main {
-    gap: var(--space-lg);
+    gap: 54px;
+  }
+
+  h2 {
+    font-size: 44px;
+  }
+
+  .hero {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--space-md);
+  }
+
+  /* Der Textblock löst sich auf, damit alle Teile direkt im Hero sortiert
+     werden können. */
+  .hero-text {
+    display: contents;
+  }
+
+  .hero h1 {
+    order: 1;
+    font-size: 62px;
+    line-height: 50px;
+  }
+
+  .hero-visual {
+    order: 2;
+    flex: none;
+    width: 100%;
+    max-width: 420px;
+    align-self: center;
+  }
+
+  .hero-text p {
+    order: 3;
+    max-width: none;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 23px;
+    color: #ffffff;
+  }
+
+  .hero-text .btn {
+    order: 4;
+    align-self: center;
+    width: 172px;
+    margin-top: 30px;
+  }
+
+  /* Ohne Hover auf dem Touchscreen ist das Plus dauerhaft sichtbar. */
+  .hero-text .btn-icon {
+    width: 24px;
+    opacity: 1;
+    border-width: 2px;
   }
 
   .survey-list,
@@ -72,6 +120,34 @@
     flex-direction: column;
   }
 
+  .list-controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .filter-trigger,
+  .filter-menu {
+    width: 100%;
+  }
+
+  .overlay {
+    padding: 24px 0 60px;
+  }
+
+  .overlay-header {
+    max-width: calc(100% - 32px);
+  }
+
+  .overlay-header .logo-button img {
+    width: 119px;
+    height: auto;
+  }
+
+  .detail-body,
+  .create-body {
+    max-width: calc(100% - 32px);
+  }
+
   .detail-title,
   .create-title {
     font-size: 36px;
@@ -83,47 +159,18 @@
   }
 }
 
-@media (max-width: 520px) {
-  h1 {
-    font-size: 32px;
-  }
-
+@media (max-width: 400px) {
   h2 {
-    font-size: 28px;
+    font-size: 36px;
   }
 
-  p {
-    font-size: 16px;
-  }
-
-  .logo-link img,
-  .overlay-header .logo-button img {
-    width: 110px;
-    height: 52px;
-  }
-
-  .hero-visual {
-    flex: 0 0 260px;
-    transform: scale(0.62);
-    margin: 0 -160px -160px 0;
-  }
-
-  .list-controls {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .filter-trigger,
-  .filter-menu {
-    width: 100%;
+  .hero h1 {
+    font-size: 52px;
+    line-height: 44px;
   }
 
   .detail-title,
   .create-title {
-    font-size: 28px;
-  }
-
-  .overlay {
-    padding: 24px 0 60px;
+    font-size: 30px;
   }
 }
