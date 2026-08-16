@@ -1,0 +1,37 @@
+/* Design tokens: colours, fonts, radii and spacing used across the app. */
+
+:root {
+  --color-bg: #35273a;
+  --color-bg-deep: #221227;
+  --color-primary: #ffb770;
+  --color-primary-hover: #ffcfa1;
+  --color-primary-soft: #fee9d4;
+  --color-accent: #ee9236;
+  --color-surface: #fefdff;
+  --color-surface-alt: #faf5fe;
+  --color-surface-hover: #f4e9fb;
+  --color-panel: rgba(142, 112, 153, 0.16);
+  --color-text-light: #fefdff;
+  --color-text-dark: #35273a;
+  --color-text-muted: #6c5690;
+
+  --font-heading: 'Nerko One', cursive;
+  --font-body: 'Mulish', sans-serif;
+  --font-label: 'Nokora', sans-serif;
+
+  --radius-sm: 5px;
+  --radius-md: 10px;
+  --radius-pill: 20px;
+  --radius-card: 0 80px 0 0;
+
+  --space-xs: 8px;
+  --space-sm: 16px;
+  --space-md: 24px;
+  --space-lg: 40px;
+  --space-xl: 64px;
+  --space-xxl: 90px;
+
+  --content-width: 1220px;
+  --transition-fast: 0.18s ease;
+  --transition-slow: 0.5s cubic-bezier(0.22, 0.8, 0.28, 1);
+}

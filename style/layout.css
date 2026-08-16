@@ -1,0 +1,147 @@
+/* Page skeleton: header, hero section and the surveys section. */
+
+.page-header,
+main {
+  width: 100%;
+  max-width: var(--content-width);
+  margin: 0 auto;
+  padding: 0 var(--space-md);
+}
+
+.page-header {
+  margin-bottom: var(--space-xxl);
+}
+
+.logo-link img {
+  display: block;
+  width: 150px;
+  height: 70px;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xxl);
+}
+
+.hero {
+  display: flex;
+  align-items: flex-start;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+
+.hero-text {
+  flex: 1 1 480px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  align-items: flex-start;
+  max-width: 620px;
+}
+
+.hero-text p {
+  max-width: 560px;
+}
+
+.hero-visual {
+  position: relative;
+  flex: 0 0 420px;
+  width: 420px;
+  height: 420px;
+}
+
+.hero-image {
+  display: block;
+  width: 420px;
+  height: 420px;
+  object-fit: contain;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-icon {
+  position: absolute;
+  display: block;
+  pointer-events: none;
+  z-index: 3;
+  transition: transform var(--transition-slow);
+}
+
+.hero-icon-bubble {
+  left: -8px;
+  top: 52px;
+  z-index: 2;
+  transform: scale(0.52) translate(48px, 28px);
+  transform-origin: 78% 78%;
+}
+
+.hero-icon-check {
+  left: 272px;
+  top: 262px;
+  z-index: 0;
+  transform: translateX(0) scale(0.78);
+}
+
+.hero-icon-star {
+  left: 51px;
+  top: 311px;
+  transform-origin: 43% 43%;
+}
+
+.hero-icon-question {
+  left: 311px;
+  top: 10px;
+  transform-origin: 45% 42%;
+}
+
+.hero-visual:hover .hero-icon-bubble {
+  transform: scale(1) translate(0, 0);
+}
+
+.hero-visual:hover .hero-icon-check {
+  transform: translateX(46px) scale(1.05);
+}
+
+.hero-visual:hover .hero-icon-star,
+.hero-visual:hover .hero-icon-question {
+  transform: scale(1.22);
+}
+
+.surveys {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.ending-soon {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.ending-soon-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+}
+
+.list-controls {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.survey-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-sm);
+}
+
+.survey-list-empty {
+  padding: var(--space-md);
+  color: var(--color-primary-hover);
+  text-align: center;
+}

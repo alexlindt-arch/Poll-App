@@ -14,9 +14,9 @@ Umfragen in Minuten erstellen, teilen und live auswerten – vom Team-Event bis 
 
 ![HTML5](https://img.shields.io/badge/HTML5-35273A?style=flat-square&logo=html5&logoColor=FFB770)
 ![CSS3](https://img.shields.io/badge/CSS3-35273A?style=flat-square&logo=css3&logoColor=FFB770)
-![JavaScript](https://img.shields.io/badge/JavaScript-35273A?style=flat-square&logo=javascript&logoColor=FFB770)
-![React 18](https://img.shields.io/badge/React_18-35273A?style=flat-square&logo=react&logoColor=FFB770)
-![No Build Step](https://img.shields.io/badge/kein_Build--Step-35273A?style=flat-square&logoColor=FFB770)
+![JavaScript](https://img.shields.io/badge/Vanilla_JS-35273A?style=flat-square&logo=javascript&logoColor=FFB770)
+![Kein Framework](https://img.shields.io/badge/kein_Framework-35273A?style=flat-square&logoColor=FFB770)
+![Responsive](https://img.shields.io/badge/responsive-35273A?style=flat-square&logoColor=FFB770)
 
 </div>
 
@@ -24,13 +24,12 @@ Umfragen in Minuten erstellen, teilen und live auswerten – vom Team-Event bis 
 
 ## Über das Projekt
 
-Poll App ist ein voll funktionsfähiger Prototyp einer Umfrage-Plattform. Nutzer legen
-eigene Umfragen mit beliebig vielen Fragen und Antworten an, veröffentlichen sie und
-sehen die Ergebnisse als Live-Balkendiagramm neben den Fragen.
+Poll App ist eine Umfrage-Plattform: Nutzer legen eigene Umfragen mit beliebig vielen
+Fragen und Antworten an, veröffentlichen sie, stimmen ab und sehen die Auswertung als
+Live-Balkendiagramm direkt neben den Fragen.
 
-Die komplette Anwendung – Markup, Styles und Logik – steckt in einer einzigen
-`index.html`. Es gibt keinen Build-Schritt, kein `npm install`, kein Framework-Setup:
-Ordner in einen Webserver legen, fertig.
+Gebaut mit reinem HTML, CSS und JavaScript – ohne Framework, ohne Build-Schritt und
+ohne Abhängigkeiten. Ordner in einen Webserver legen, fertig.
 
 <br>
 
@@ -38,17 +37,17 @@ Ordner in einen Webserver legen, fertig.
 
 ### Übersicht
 
-Hero-Bereich, bald endende Umfragen und die Liste aller Umfragen mit Filter nach
-aktiv/vergangen und Sortierung nach Kategorie.
+Hero-Bereich, bald endende Umfragen und die Liste aller Umfragen mit Umschalter für
+laufende/abgeschlossene Umfragen und Kategoriefilter.
 
 <img src="docs/screenshots/01-overview.png" alt="Übersicht mit Hero und Umfrage-Listen" width="100%">
 
 <br>
 
-### Umfrage beantworten – mit Live-Ergebnissen
+### Umfrage beantworten – mit Live-Auswertung
 
-Alle Fragen einer Umfrage, jeweils mit Einfach- oder Mehrfachauswahl. Rechts
-aktualisieren sich die Ergebnisse in Echtzeit.
+Alle Fragen einer Umfrage, je nach Einstellung mit Einfach- oder Mehrfachauswahl.
+Rechts aktualisieren sich die Ergebnisse in Echtzeit.
 
 <img src="docs/screenshots/02-survey-detail.png" alt="Umfrage-Detailansicht mit Live-Ergebnissen" width="100%">
 
@@ -56,10 +55,18 @@ aktualisieren sich die Ergebnisse in Echtzeit.
 
 ### Umfrage erstellen
 
-Name, Enddatum, Kategorie und Beschreibung, dann Fragen und Antwortoptionen
-dynamisch hinzufügen oder entfernen – bis zu sechs Antworten pro Frage.
+Pflichtfelder sind mit `*` markiert und werden validiert. Fragen und Antwortoptionen
+lassen sich dynamisch hinzufügen und entfernen – bis zu sechs Antworten pro Frage.
 
 <img src="docs/screenshots/03-create-survey.png" alt="Formular zum Anlegen einer neuen Umfrage" width="100%">
+
+<br>
+
+### Mobil
+
+<div align="center">
+  <img src="docs/screenshots/04-mobile.png" alt="Mobile Ansicht der Startseite" width="320">
+</div>
 
 <br>
 
@@ -67,14 +74,14 @@ dynamisch hinzufügen oder entfernen – bis zu sechs Antworten pro Frage.
 
 | | Feature | Beschreibung |
 |---|---|---|
-| 📋 | **Umfragen-Übersicht** | Karten für bald endende Umfragen plus vollständige Liste aller Umfragen |
-| 🔀 | **Filter & Sortierung** | Umschalten zwischen aktiven und vergangenen Umfragen, sortieren nach Kategorie |
-| ✍️ | **Umfrage-Editor** | Fragen und Antworten dynamisch hinzufügen, bearbeiten und löschen |
-| ☑️ | **Einfach- & Mehrfachauswahl** | Pro Frage einstellbar, ob mehrere Antworten erlaubt sind |
-| 📊 | **Live-Ergebnisse** | Prozentuale Auswertung als Balkendiagramm direkt neben den Fragen |
-| 🏷️ | **Kategorien & Status** | Team activities, Health & Wellness, Gaming, Workplace Culture, Food & Drinks – jeweils als Draft oder Published |
-| ⏱️ | **Restlaufzeit** | „Ends in X Days" auf jeder Karte, berechnet aus dem Enddatum |
-| 🎨 | **Eigenes Design-System** | Durchgängige Farbwelt, drei Schriftfamilien, animierte Übergänge zwischen den Ansichten |
+| ⏳ | **Bald endende Umfragen** | Eigener Bereich über der Liste, chronologisch nach Enddatum sortiert |
+| 🔀 | **Laufend / Abgeschlossen** | Reiter zum Umschalten; abgelaufene Umfragen sind einsehbar, aber gesperrt |
+| 🏷️ | **Kategoriefilter** | Getrennt je Reiter, zeigt nur tatsächlich vorhandene Kategorien, jederzeit auf „Alle" zurücksetzbar |
+| ✍️ | **Umfrage-Editor** | Overlay-Dialog mit Pflicht- und optionalen Feldern, Validierung und dynamischen Fragen |
+| ☑️ | **Einfach- & Mehrfachauswahl** | Pro Frage einstellbar |
+| 📊 | **Live-Auswertung** | Prozentbalken neben den Fragen, die sich laufend aktualisieren |
+| 📱 | **Responsive** | Breakpoints bei 1024 px, 768 px und 520 px |
+| ⌨️ | **Tastatur & A11y** | Escape schließt Overlays, ARIA-Rollen für Dialoge, Tabs und Live-Region |
 
 <br>
 
@@ -82,12 +89,11 @@ dynamisch hinzufügen oder entfernen – bis zu sechs Antworten pro Frage.
 
 | Bereich | Umsetzung |
 |---|---|
-| Struktur & Styling | HTML5, CSS3 (Flexbox & Grid, Inline-Styles im Komponenten-Markup) |
-| Logik | JavaScript (ES2020+), klassenbasierte Komponenten-Logik |
-| Rendering | React 18 – zur Laufzeit über CDN geladen, kein Bundler |
-| Templating | Design-Component-Runtime (`assets/support.js`), Markup in `<x-dc>` |
-| Schriften | Nerko One, Mulish, Nokora (Google Fonts) |
-| Assets | SVG-Icons und -Logos, PNG-Illustration |
+| Struktur | Semantisches HTML5, keine Inline-Styles |
+| Styling | CSS3 mit Custom Properties, Flexbox und Grid, aufgeteilt in sechs Dateien |
+| Logik | Vanilla JavaScript (ES2021), aufgeteilt in acht Module |
+| Rendering | Template-Funktionen erzeugen HTML-Strings, `render.js` schreibt sie ins DOM |
+| Abhängigkeiten | keine – nur Google Fonts (Nerko One, Mulish, Nokora) |
 
 <br>
 
@@ -95,28 +101,33 @@ dynamisch hinzufügen oder entfernen – bis zu sechs Antworten pro Frage.
 
 ```
 Poll-App/
-├── index.html                  # Die komplette App: Markup, Styles und Logik
-├── assets/
-│   ├── support.js              # Design-Component-Runtime (lädt React + Babel)
-│   └── img/
-│       ├── hero-visual.png     # Hero-Illustration
-│       ├── logo.svg            # Logo
-│       ├── logo-orange.svg     # Logo, orange Variante
-│       ├── check.svg           # Icon: Häkchen
-│       ├── question-mark.svg   # Icon: Fragezeichen
-│       ├── star.svg            # Icon: Stern
-│       └── typing-bubble.svg   # Icon: Sprechblase
-├── docs/
-│   └── screenshots/            # Screenshots für dieses README
-└── README.md
+├── index.html              # Semantisches Grundgerüst, leere Container fürs Rendering
+├── style/
+│   ├── variables.css       # Design-Tokens: Farben, Fonts, Abstände
+│   ├── base.css            # Reset, Typografie, Hilfsklassen, Keyframes
+│   ├── layout.css          # Header, Hero, Umfragen-Sektion
+│   ├── components.css      # Buttons, Karten, Reiter, Filter, Toast
+│   ├── overlay.css         # Detailansicht und Erstellen-Dialog
+│   └── responsive.css      # Breakpoints
+├── js/
+│   ├── data.js             # Konstanten und Seed-Daten
+│   ├── state.js            # Zustand und Objekt-Factories
+│   ├── surveys.js          # Abfragen, Sortierung, Auswertung, Abstimmen
+│   ├── templates.js        # HTML-Templates (kein DOM-Zugriff)
+│   ├── render.js           # Schreibt die Startseite ins DOM
+│   ├── detail.js           # Detail-Overlay
+│   ├── form.js             # Erstellen-Dialog inkl. Validierung
+│   └── main.js             # Einstiegspunkt, Reiter, Filter, Live-Timer
+├── assets/img/             # Logos, Icons, Hero-Illustration
+└── docs/screenshots/       # Screenshots für dieses README
 ```
 
 <br>
 
 ## Lokal starten
 
-Die App braucht einen HTTP-Server – per Doppelklick über `file://` funktioniert sie
-nicht, weil die Runtime React und Babel nachlädt.
+Die App braucht einen HTTP-Server, weil die Schriften über eine externe Domain geladen
+werden:
 
 ```bash
 git clone https://github.com/alexlindt-arch/Poll-App.git
@@ -128,8 +139,24 @@ npx serve .
 php -S localhost:8000
 ```
 
-Dann `http://localhost:8000` im Browser öffnen. Eine Internetverbindung ist nötig,
-damit React, Babel und die Google Fonts geladen werden können.
+Dann `http://localhost:8000` im Browser öffnen.
+
+<br>
+
+## Code-Konventionen
+
+Das Projekt folgt den Coding-Konventionen der Developer Akademie:
+
+| Regel | Stand |
+|---|---|
+| Funktionen maximal 14 Zeilen | 102 Funktionen, **0 Verstöße** |
+| JSDoc über jeder Funktion | **102 von 102** dokumentiert |
+| Keine Inline-Styles im HTML | **0** `style`-Attribute |
+| Trennung von HTML, CSS und JS | 1 HTML-Datei, 6 CSS-Dateien, 8 JS-Module |
+| Sprechende Namen, kein `var` | durchgehend `const`/`let`, camelCase |
+| Keine Duplikate | gemeinsame Bausteine z. B. in `surveyTeaserTemplate()` |
+
+Nutzereingaben werden vor dem Einfügen ins DOM über `escapeHtml()` maskiert.
 
 <br>
 
@@ -140,31 +167,31 @@ damit React, Babel und die Google Fonts geladen werden können.
 | | Hex | Verwendung |
 |---|---|---|
 | ![](https://img.shields.io/badge/-35273A-35273A?style=flat-square) | `#35273A` | Seiten-Hintergrund, Fließtext auf hellen Flächen |
-| ![](https://img.shields.io/badge/-FFB770-FFB770?style=flat-square) | `#FFB770` | Primärfarbe: Überschriften, Buttons, Links |
+| ![](https://img.shields.io/badge/-FFB770-FFB770?style=flat-square) | `#FFB770` | Primärfarbe: Überschriften, Buttons, Balken |
 | ![](https://img.shields.io/badge/-FFCFA1-FFCFA1?style=flat-square) | `#FFCFA1` | Hover-Zustand der Primärfarbe |
 | ![](https://img.shields.io/badge/-FEE9D4-FEE9D4?style=flat-square) | `#FEE9D4` | Badges, Status-Labels |
 | ![](https://img.shields.io/badge/-FEFDFF-FEFDFF?style=flat-square) | `#FEFDFF` | Karten- und Panel-Hintergrund |
-| ![](https://img.shields.io/badge/-F4E9FB-F4E9FB?style=flat-square) | `#F4E9FB` | Detailansicht, Flächen mit leichtem Lila-Stich |
-| ![](https://img.shields.io/badge/-221227-221227?style=flat-square) | `#221227` | Tiefen, Schatten, dunkelste Ebene |
+| ![](https://img.shields.io/badge/-F4E9FB-F4E9FB?style=flat-square) | `#F4E9FB` | Flächen mit leichtem Lila-Stich |
+| ![](https://img.shields.io/badge/-EE9236-EE9236?style=flat-square) | `#EE9236` | Akzent: Prozentwerte, Fehlerrahmen |
 
 **Typografie**
 
 | Schrift | Einsatz |
 |---|---|
-| **Nerko One** | Überschriften und Logo-Schriftzug – handschriftlicher Charakter |
-| **Mulish** | Fließtext, Formulare, Buttons |
-| **Nokora** | Kleine Labels und Hinweistexte |
+| **Nerko One** | Überschriften und Logo-Schriftzug |
+| **Mulish** | Fließtext, Formulare, Listen |
+| **Nokora** | Buttons und kleine Labels |
 
 <br>
 
 ## Hinweise
 
 - Die Umfragen sind Beispieldaten. Es gibt kein Backend – angelegte Umfragen und
-  abgegebene Antworten leben im Speicher der Seite und sind nach einem Reload weg.
-- Das Layout ist für Desktop-Breiten gebaut; auf schmalen Screens läuft die
-  Headline über den Rand hinaus.
-- React, Babel und die Google Fonts werden zur Laufzeit über CDN geladen –
-  offline läuft die App nicht.
+  abgegebene Stimmen leben im Speicher der Seite und sind nach einem Reload weg.
+- Die Live-Auswertung simuliert eingehende Stimmen im Sekundentakt, damit sich die
+  Balken sichtbar bewegen.
+- Der ursprüngliche Design-Export (React über CDN) liegt weiterhin im Branch
+  [`design-export`](https://github.com/alexlindt-arch/Poll-App/tree/design-export).
 
 <br>
 

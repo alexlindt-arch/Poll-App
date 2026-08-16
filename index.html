@@ -1,877 +1,105 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./assets/support.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Poll App &ndash; Collect Feedback, Unlock Ideas</title>
+  <meta name="description" content="Create and share surveys in minutes, collect opinions and see the results live.">
+  <link rel="icon" href="assets/img/logo.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Nerko+One&family=Mulish:wght@400;500;600;700;800&family=Nokora:wght@400;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="style/variables.css">
+  <link rel="stylesheet" href="style/base.css">
+  <link rel="stylesheet" href="style/layout.css">
+  <link rel="stylesheet" href="style/components.css">
+  <link rel="stylesheet" href="style/overlay.css">
+  <link rel="stylesheet" href="style/responsive.css">
+  <script src="js/data.js" defer></script>
+  <script src="js/state.js" defer></script>
+  <script src="js/surveys.js" defer></script>
+  <script src="js/templates.js" defer></script>
+  <script src="js/render.js" defer></script>
+  <script src="js/detail.js" defer></script>
+  <script src="js/form.js" defer></script>
+  <script src="js/main.js" defer></script>
 </head>
-<body>
-<x-dc>
-<helmet>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Nerko+One&family=Mulish:wght@400;500;600;700;800&family=Nokora:wght@400;700&display=swap" rel="stylesheet">
-<style>
-  *, *::before, *::after { box-sizing: border-box; }
-  body { margin: 0; background: #35273A; }
-  a { color: #FFB770; text-decoration: none; }
-  a:hover { color: #FFCFA1; }
 
-  @keyframes pollFadeIn { from { opacity: 0 } to { opacity: 1 } }
-  @keyframes pollRise { from { opacity: 0; transform: translateY(24px) } to { opacity: 1; transform: translateY(0) } }
-  html, body { scrollbar-width: thin; scrollbar-color: #FFB770 #BABABA }
-  ::-webkit-scrollbar { width: 8px; height: 8px }
-  ::-webkit-scrollbar-thumb { background: #FFB770; border-radius: 10px; box-shadow: 3px 3px 3.2px rgba(0,0,0,0.25) }
-  ::-webkit-scrollbar-track { background: #BABABA; border-radius: 10px }
-</style>
-</helmet>
+<body onload="init()">
 
-<div style="min-height: 100vh; background: #35273A; font-family: 'Mulish', sans-serif; padding: 39px 0 120px; -webkit-font-smoothing: antialiased;">
-  <div style="max-width: 1220px; margin: 0 auto; padding: 0 24px; display: flex; flex-direction: column; gap: 90px;">
+  <header class="page-header">
+    <a href="index.html" class="logo-link" aria-label="Poll App home">
+      <img src="assets/img/logo-orange.svg" alt="Poll App logo" width="150" height="70">
+    </a>
+  </header>
 
-    <div style="display: flex; flex-direction: row; justify-content: space-between; align-items: flex-start; gap: 10px; height: 48px;">
-      <img src="assets/img/logo-orange.svg" alt="Poll App" width="150" height="70" style="display: block; width: 150px; height: 70px;">
-    </div>
+  <main>
 
-    <div style="display: flex; align-items: flex-start; gap: 32px; flex-wrap: wrap;">
-      <div style="display: flex; flex-direction: column; gap: 40px; flex: 1 1 620px; max-width: 712px;">
-        <div style="display: flex; flex-direction: column; gap: 24px;">
-          <h1 style="margin: 0; font-family: 'Nerko One', cursive; font-weight: 400; font-size: 100px; line-height: 89px; color: #FFB770; text-wrap: balance;">Collect Feedback,<br>Unlock Ideas</h1>
-          <p style="margin: 0; max-width: 666px; font-weight: 600; font-size: 24px; line-height: 30px; color: #FFFFFF; text-wrap: pretty;">Create and share surveys in minutes – from team events to workplace culture. Collect opinions, engage your audience, and turn feedback into action.</p>
+    <section class="hero" aria-labelledby="hero-headline">
+      <div class="hero-text">
+        <h1 id="hero-headline">Collect Feedback,<br>Unlock Ideas</h1>
+        <p>
+          Create and share surveys in minutes &ndash; from team events to workplace culture.
+          Collect opinions, engage your audience, and turn feedback into action.
+        </p>
+        <button type="button" class="btn btn-primary" onclick="openCreateForm()">
+          <span>New survey</span>
+          <span class="btn-icon" aria-hidden="true">+</span>
+        </button>
+      </div>
+      <div class="hero-visual">
+        <img class="hero-image" src="assets/img/hero-visual.png" alt="Illustration of a survey on a mobile screen"
+          width="420" height="420">
+        <img class="hero-icon hero-icon-bubble" src="assets/img/typing-bubble.svg" alt="" width="196" height="142">
+        <img class="hero-icon hero-icon-check" src="assets/img/check.svg" alt="" width="112" height="113">
+        <img class="hero-icon hero-icon-star" src="assets/img/star.svg" alt="" width="81" height="78">
+        <img class="hero-icon hero-icon-question" src="assets/img/question-mark.svg" alt="" width="77" height="87">
+      </div>
+    </section>
+
+    <section class="surveys" aria-labelledby="surveys-headline">
+      <h2 id="surveys-headline">Your surveys</h2>
+
+      <section class="ending-soon" aria-labelledby="ending-soon-headline">
+        <h3 id="ending-soon-headline">Ending soon surveys</h3>
+        <div id="ending-soon-list" class="ending-soon-list"></div>
+      </section>
+
+      <div class="list-controls">
+        <div class="tabs" role="tablist" aria-label="Survey status">
+          <button type="button" id="tab-active" class="tab" role="tab" aria-selected="true"
+            onclick="showTab('active')">Active survey</button>
+          <button type="button" id="tab-past" class="tab" role="tab" aria-selected="false"
+            onclick="showTab('past')">Past survey</button>
         </div>
-        <button type="button" onClick="{{ openCreate }}" onMouseEnter="{{ btn.heroEnter }}" onMouseLeave="{{ btn.leave }}" style="{{ btn.heroStyle }}"><span>New survey</span><span style="{{ btn.heroIconStyle }}">+</span></button>
-      </div>
-      <div onMouseEnter="{{ heroEnter }}" onMouseLeave="{{ heroLeave }}" style="position: relative; width: 426px; height: 420px; flex: none; display: flex; align-items: center; justify-content: center;">
-        <img src="assets/img/hero-visual.png" alt="Survey illustration" style="{{ heroStyle }}">
-        <img src="assets/img/typing-bubble.svg" alt="" style="{{ heroBubbleStyle }}">
-        <img src="assets/img/check.svg" alt="" style="{{ heroCheckStyle }}">
-        <div style="position: absolute; z-index: 2; left: 46px; top: 306px; width: 80px; height: 80px; border-radius: 50%; background: #35273A; pointer-events: none;"></div>
-        <div style="position: absolute; z-index: 2; left: 311px; top: 11px; width: 73px; height: 73px; border-radius: 50%; background: #35273A; pointer-events: none;"></div>
-        <img src="assets/img/star.svg" alt="" style="{{ heroStarStyle }}">
-        <img src="assets/img/question-mark.svg" alt="" style="{{ heroQuestionStyle }}">
-      </div>
-    </div>
 
-    <div style="width: 100%; max-width: 1042px; margin: 0 auto; display: flex; flex-direction: column; gap: 56px;">
-      <h2 style="margin: 0; font-family: 'Nerko One', cursive; font-weight: 400; font-size: 72px; line-height: 87px; text-align: center; color: #FFB770;">Your surveys</h2>
-
-      <div style="display: flex; flex-direction: column; gap: 32px;">
-        <h3 style="margin: 0; font-weight: 500; font-size: 32px; line-height: 40px; color: #FFFFFF;">Ending soon surveys</h3>
-        <div style="display: flex; justify-content: center; align-items: center; gap: 32px; flex-wrap: nowrap; filter: drop-shadow(0px 4px 4px rgba(0,0,0,0.25));">
-          <sc-for list="{{ endingSoon }}" as="s" hint-placeholder-count="3">
-            <div role="button" tabindex="0" onClick="{{ s.open }}" onMouseEnter="{{ s.enter }}" onMouseLeave="{{ s.leave }}" style="{{ s.cardStyle }}">
-              <div style="display: flex; flex-direction: column; justify-content: space-between; align-items: flex-start; gap: 64px; width: 233px; height: 210px;">
-                <div style="display: flex; flex-direction: column; gap: 8px; width: 233px;">
-                  <div style="font-weight: 600; font-size: 14px; line-height: 18px; color: #35273A;">{{ s.category }}</div>
-                  <div style="width: 220px; font-weight: 700; font-size: 26px; line-height: 33px; color: #35273A; text-wrap: pretty;">{{ s.title }}</div>
-                </div>
-                <div style="display: flex; align-items: center; gap: 16px; width: 233px; height: 21px;">
-                  <div style="{{ s.badgeStyle }}">{{ s.deadlineLabel }}</div>
-                </div>
-              </div>
-            </div>
-          </sc-for>
+        <div class="category-filter">
+          <button type="button" id="filter-trigger" class="filter-trigger" aria-expanded="false"
+            aria-controls="filter-menu" onclick="toggleCategoryMenu()">
+            <span id="filter-label">Filter by category</span>
+            <span class="filter-arrow" aria-hidden="true">&#9662;</span>
+          </button>
+          <ul id="filter-menu" class="filter-menu d-none" aria-label="Categories"></ul>
         </div>
       </div>
 
-      <div style="margin-top: 24px; display: flex; flex-direction: column; gap: 24px;">
-        <div style="display: flex; justify-content: space-between; align-items: center; gap: 40px; flex-wrap: wrap;">
-          <div style="display: flex; align-items: center; gap: 24px;">
-            <button type="button" onClick="{{ showActive }}" onMouseEnter="{{ tabActiveEnter }}" onMouseLeave="{{ tabLeave }}" style="{{ activeTabStyle }}">Active survey</button>
-            <button type="button" onClick="{{ showPast }}" onMouseEnter="{{ tabPastEnter }}" onMouseLeave="{{ tabLeave }}" style="{{ pastTabStyle }}">Past survey</button>
-          </div>
-          <div style="position: relative;">
-            <button type="button" onClick="{{ toggleSort }}" style="{{ sortTriggerStyle }}">
-              <span>Sort by categories</span>
-              <span style="{{ sortArrowStyle }}">▼</span>
-            </button>
-            <sc-if value="{{ sortChosen }}" hint-placeholder-val="{{ false }}">
-              <div style="padding: 4px 4px 4px 10px; font-weight: 400; font-size: 14px; line-height: 18px; letter-spacing: 0.02em; color: #FFB770;">{{ sortChosen }}</div>
-            </sc-if>
-            <sc-if value="{{ sortOpen }}" hint-placeholder-val="{{ false }}">
-              <div style="position: absolute; right: 0; top: 36px; z-index: 20; min-width: 206px; background: #FFFFFF; border-radius: 6px; box-shadow: 0 12px 30px rgba(0,0,0,0.4); padding: 8px 4px; display: flex; flex-direction: column; gap: 4px;">
-                <sc-for list="{{ categoryOptions }}" as="c" hint-placeholder-count="4">
-                  <button type="button" onClick="{{ c.select }}" style="{{ c.style }}" style-hover="background: #F4E9FB;">{{ c.label }}</button>
-                </sc-for>
-              </div>
-            </sc-if>
-          </div>
-        </div>
+      <div id="survey-list" class="survey-list"></div>
+      <p id="survey-list-empty" class="survey-list-empty d-none">No surveys in this category.</p>
+    </section>
 
-        <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 513px)); justify-content: space-between; gap: 16px;">
-          <sc-for list="{{ listSurveys }}" as="s" hint-placeholder-count="6">
-            <div role="button" tabindex="0" onClick="{{ s.open }}" style="cursor: pointer; display: flex; flex-direction: column; justify-content: space-between; gap: 24px; min-height: 127px; padding: 12px 20px; background: rgba(217,217,217,0.08); border-radius: 5px 50px 5px 5px; transition: background .18s ease;" style-hover="background: rgba(217,217,217,0.16);">
-              <div style="display: flex; flex-direction: column; gap: 8px;">
-                <div style="font-weight: 500; font-size: 16px; line-height: 20px; color: #FFCFA1;">{{ s.category }}</div>
-                <div style="font-weight: 700; font-size: 24px; line-height: 30px; color: #FFFFFF; text-wrap: pretty;">{{ s.title }}</div>
-              </div>
-              <div style="display: flex; justify-content: flex-end;">
-                <div style="display: flex; justify-content: center; align-items: center; padding: 3px 6px; background: #FFCFA1; border-radius: 0px 14px 0px 0px; font-weight: 500; font-size: 12px; line-height: 15px; color: #221227;">{{ s.deadlineLabel }}</div>
-              </div>
-            </div>
-          </sc-for>
-        </div>
+  </main>
 
-        <sc-if value="{{ listEmpty }}" hint-placeholder-val="{{ false }}">
-          <div style="padding: 48px; display: flex; flex-direction: column; align-items: center; gap: 16px; color: #C7B4DC; font-size: 18px;">
-            <img src="assets/img/question-mark.svg" alt="" width="72" height="82" style="display: block; width: 72px; height: 82px;">
-            <span>No surveys in this category.</span>
-          </div>
-        </sc-if>
-      </div>
-    </div>
-  </div>
+  <div id="detail-overlay" class="overlay d-none" role="dialog" aria-modal="true"
+    aria-label="Survey details"></div>
 
-  <sc-if value="{{ toast }}" hint-placeholder-val="{{ false }}">
-    <div style="position: fixed; z-index: 60; right: 40px; bottom: 40px; display: flex; flex-direction: row; align-items: center; gap: 16px; width: 357px; min-height: 86px; padding: 14px 26px; background: #FEE9D4; border-radius: 5px 50px 5px 5px; box-shadow: 0 12px 30px rgba(20,10,26,0.25); animation: pollRise .24s ease;">
-      <img src="assets/img/check.svg" alt="" width="48" height="49" style="flex: none; display: block; width: 48px; height: 49px;">
-      <span style="flex: 1 1 auto; font-family: 'Nerko One', cursive; font-weight: 400; font-size: 24px; line-height: 29px; letter-spacing: 0.02em; color: #35273A;">{{ toast }}</span>
-      <button type="button" onClick="{{ closeToast }}" aria-label="Close" style="flex: none; border: none; cursor: pointer; background: transparent; width: 24px; height: 24px; font-size: 18px; line-height: 1; color: #35273A;">✕</button>
-    </div>
-  </sc-if>
+  <div id="create-overlay" class="overlay d-none" role="dialog" aria-modal="true"
+    aria-label="Create a new survey"></div>
 
-  <sc-if value="{{ detail }}" hint-placeholder-val="{{ false }}">
-    <div style="position: fixed; inset: 0; z-index: 40; background: #FEFDFF; overflow-x: hidden; overflow-y: auto; overscroll-behavior: contain; animation: pollFadeIn .2s ease; font-family: 'Mulish', sans-serif; padding: 47px 0 80px;">
-      <div style="width: 1218px; max-width: calc(100% - 48px); margin: 0 auto 37px; display: flex; flex-direction: row; justify-content: space-between; align-items: flex-start; gap: 10px; height: 48px;">
-        <img src="assets/img/logo.svg" alt="Poll App" role="button" tabindex="0" onClick="{{ closeDetail }}" width="119" height="50" style="display: block; width: 119px; height: 50px; cursor: pointer;">
-        <button type="button" onClick="{{ openCreate }}" onMouseEnter="{{ btn.detailEnter }}" onMouseLeave="{{ btn.leave }}" style="{{ btn.detailStyle }}"><span>Create survey</span><span style="{{ btn.detailIconStyle }}">+</span></button>
-      </div>
-      <div style="width: 1059px; max-width: calc(100% - 48px); margin: 0 auto; display: flex; flex-direction: row; align-items: flex-start; gap: 42px; animation: pollRise .24s ease;">
-        <div style="flex: none; display: flex; flex-direction: column; align-items: flex-start; gap: 8px; width: 702px; padding: 40px; background: rgba(142,112,153,0.1); border-radius: 0px 160px 0px 0px;">
-          <div style="display: flex; flex-direction: row; align-items: flex-end; gap: 8px; width: 586px;">
-            <div style="{{ detail.statusStyle }}">{{ detail.statusLabel }}</div>
-          </div>
+  <div id="toast" class="toast d-none" role="status" aria-live="polite"></div>
 
-          <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 24px; width: 622px;">
-            <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 40px; width: 622px;">
-              <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 8px; width: 622px;">
-                <div style="display: flex; flex-direction: row; justify-content: space-between; align-items: flex-start; gap: 8px; width: 608px; font-weight: 500; font-size: 14px; line-height: 18px;">
-                  <span style="color: #35273A;">{{ detail.endsLabel }}</span>
-                  <span style="color: #221227;">{{ detail.categoryLine }}</span>
-                </div>
-                <h2 style="margin: 0; width: 622px; font-family: 'Nerko One', cursive; font-weight: 400; font-size: 56px; line-height: 50px; color: #EE9236; text-wrap: pretty;">{{ detail.title }}</h2>
-                <p style="margin: 0; width: 622px; font-weight: 500; font-size: 16px; line-height: 20px; color: #35273A; text-wrap: pretty;">{{ detail.description }}</p>
-              </div>
-
-              <div style="display: flex; flex-direction: row; flex-wrap: wrap; align-items: flex-start; gap: 24px; width: 622px;">
-                <sc-for list="{{ detail.questions }}" as="q" hint-placeholder-count="4">
-                  <div style="flex: none; display: flex; flex-direction: column; align-items: flex-start; gap: 24px; width: 299px;">
-                    <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 3px; width: 299px;">
-                      <div style="width: 299px; font-weight: 700; font-size: 18px; line-height: 23px; color: #35273A; text-wrap: pretty;">{{ q.heading }}</div>
-                      <sc-if value="{{ q.multi }}" hint-placeholder-val="{{ true }}">
-                        <div style="padding-left: 26px; font-weight: 400; font-size: 12px; line-height: 15px; color: #35273A;">More than one answers are possible.</div>
-                      </sc-if>
-                    </div>
-                    <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 8px; width: 299px; padding-left: 8px;">
-                      <sc-for list="{{ q.options }}" as="o" hint-placeholder-count="4">
-                        <div role="button" tabindex="0" onClick="{{ o.toggle }}" onMouseEnter="{{ o.enter }}" onMouseLeave="{{ o.leave }}" style="{{ o.rowStyle }}">
-                          <span style="flex: none; display: flex; align-items: center; justify-content: center; width: 21px; height: 21px;">
-                            <span style="{{ o.boxStyle }}">{{ o.boxMark }}</span>
-                          </span>
-                          <span style="display: flex; flex-direction: row; align-items: flex-start; gap: 4px; width: 241px;">
-                            <span style="flex: none; font-weight: 700; font-size: 16px; line-height: 20px; color: #35273A;">{{ o.letterLabel }}</span>
-                            <span style="font-weight: 400; font-size: 16px; line-height: 20px; color: #35273A;">{{ o.label }}</span>
-                          </span>
-                        </div>
-                      </sc-for>
-                    </div>
-                  </div>
-                </sc-for>
-              </div>
-            </div>
-
-            <button type="button" onClick="{{ detail.submit }}" disabled="{{ detail.submitDisabled }}" style="{{ detail.submitStyle }}">{{ detail.submitLabel }}</button>
-          </div>
-        </div>
-
-        <div style="flex: none; display: flex; flex-direction: column; align-items: flex-start; gap: 16px; width: 315px; padding-top: 40px;">
-          <div style="width: 315px; font-family: 'Nerko One', cursive; font-weight: 400; font-size: 32px; line-height: 39px; color: #221227;">Survey results <span style="color: #FFB770;">LIVE</span></div>
-          <sc-if value="{{ detail.noResults }}" hint-placeholder-val="{{ false }}">
-            <div style="display: flex; flex-direction: column; justify-content: center; align-items: flex-start; gap: 146px; width: 315px; font-weight: 700; font-size: 18px; line-height: 23px; color: #35273A;">
-              <div style="width: 315px;">Results will be shown here after participants complete the survey.</div>
-              <div style="display: flex; flex-direction: column; align-items: center; gap: 16px; width: 315px;">
-                <img src="assets/img/typing-bubble.svg" alt="" width="158" height="114" style="display: block; width: 158px; height: 114px;">
-                <div style="width: 315px; text-align: center;">There are no answears yet.</div>
-              </div>
-            </div>
-          </sc-if>
-          <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 24px; width: 315px;">
-            <sc-for list="{{ detail.resultQuestions }}" as="q" hint-placeholder-count="4">
-              <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 16px; width: 315px;">
-                <div style="width: 315px; font-weight: 700; font-size: 18px; line-height: 23px; color: #35273A; text-wrap: pretty;">{{ q.heading }}</div>
-                <div style="display: flex; flex-direction: column; gap: 12px; width: 315px;">
-                  <sc-for list="{{ q.options }}" as="o" hint-placeholder-count="4">
-                    <div style="display: flex; flex-direction: row; align-items: center; gap: 6px; width: 315px;">
-                      <span style="flex: none; width: 15px; font-weight: 700; font-size: 12px; line-height: 15px; color: #35273A;">{{ o.letter }}</span>
-                      <span style="position: relative; flex: 1 1 auto; height: 14px; background: #EDEDED; border-radius: 0px 20px 20px 0px;">
-                        <span style="{{ o.barStyle }}"></span>
-                      </span>
-                      <span style="flex: none; width: 33px; text-align: right; font-weight: 800; font-size: 12px; line-height: 15px; color: #D79451;">{{ o.pctLabel }}</span>
-                    </div>
-                  </sc-for>
-                </div>
-              </div>
-            </sc-for>
-          </div>
-        </div>
-      </div>
-    </div>
-  </sc-if>
-
-  <sc-if value="{{ showCreate }}" hint-placeholder-val="{{ false }}">
-    <div style="position: fixed; inset: 0; z-index: 50; background: #FEFDFF; overflow-x: hidden; overflow-y: auto; overscroll-behavior: contain; padding: 40px 0 60px; animation: pollFadeIn .2s ease; font-family: 'Mulish', sans-serif;">
-      <div role="dialog" aria-modal="true" style="width: 1166px; max-width: calc(100% - 48px); margin: 0 auto; display: flex; flex-direction: column; align-items: flex-end; gap: 48px; padding: 40px 54px; background: #35273A; border-radius: 5px 100px 5px 5px; animation: pollRise .24s ease;">
-        <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 32px; width: 100%;">
-
-          <div style="display: flex; flex-direction: row; justify-content: space-between; align-items: flex-end; gap: 40px; width: 100%;">
-            <div style="display: flex; flex-direction: column; align-items: flex-start;">
-              <div style="display: flex; justify-content: center; align-items: center; padding: 3px 12px 3px 8px; background: #FEE9D4; border-radius: 0px 14px 0px 0px; font-weight: 600; font-size: 16px; line-height: 20px; color: #221227;">Draft</div>
-              <h2 style="margin: 0; font-family: 'Nerko One', cursive; font-weight: 400; font-size: 56px; line-height: 68px; color: #EE9236;">Create new survey</h2>
-            </div>
-            <button type="button" onClick="{{ closeCreate }}" style="flex: none; display: flex; justify-content: center; align-items: center; gap: 4px; padding: 8px 12px; border: none; cursor: pointer; background: rgba(255,183,112,0.3); border-radius: 10px; font-family: 'Nokora', sans-serif; font-weight: 700; font-size: 16px; line-height: 21px; color: #FEFDFF;" style-hover="background: rgba(255,183,112,0.6);">Cancel ✕</button>
-          </div>
-
-          <div style="display: flex; flex-direction: column; align-items: stretch; gap: 64px; width: 100%; padding: 40px 32px; background: rgba(142,112,153,0.16); border-radius: 5px 80px 5px 5px;">
-
-            <div style="display: flex; flex-direction: row; flex-wrap: wrap; align-items: flex-start; gap: 32px 64px;">
-              <div style="flex: 1 1 470px; display: flex; flex-direction: column; gap: 16px;">
-                <div style="display: flex; flex-direction: column; gap: 4px;">
-                  <label style="font-weight: 700; font-size: 18px; line-height: 23px; color: #FEFDFF;">Survey name</label>
-                  <input value="{{ form.title }}" onChange="{{ setTitle }}" placeholder="Let’s Plan the Next Team Event Together" style-focus="background: #FEE9D4;" style="{{ titleFieldStyle }}">
-                  <sc-if value="{{ errors.title }}" hint-placeholder-val="{{ false }}">
-                    <div style="font-size: 13px; font-weight: 600; color: #FFCFA1;">{{ errors.title }}</div>
-                  </sc-if>
-                </div>
-                <div style="display: flex; flex-direction: row; flex-wrap: wrap; align-items: flex-end; gap: 24px;">
-                  <div style="flex: 0 1 256px; display: flex; flex-direction: column; gap: 4px;">
-                    <label style="font-weight: 700; font-size: 18px; line-height: 23px; color: #FEFDFF;">Set end date <span style="font-weight: 400;">(optional)</span></label>
-                    <input type="date" value="{{ form.deadline }}" onChange="{{ setDeadline }}" style-focus="background: #FEE9D4;" style="padding: 7px 13px; background: #FEFDFF; border: none; border-radius: 5px 20px 5px 5px; font-family: 'Mulish', sans-serif; font-weight: 400; font-size: 16px; line-height: 20px; color: #35273A; width: 100%;">
-                  </div>
-                  <div style="flex: 0 1 206px; display: flex; flex-direction: column; gap: 4px;">
-                    <label style="font-weight: 700; font-size: 18px; line-height: 23px; color: #FEFDFF;">Choose category</label>
-                    <select value="{{ form.category }}" onChange="{{ setCategory }}" style-focus="background: #FEE9D4;" style="padding: 7px 13px; background: #FEFDFF; border: none; border-radius: 5px 20px 5px 5px; font-family: 'Mulish', sans-serif; font-weight: 400; font-size: 16px; line-height: 20px; color: #35273A; width: 100%;">
-                      <sc-for list="{{ categories }}" as="c" hint-placeholder-count="5">
-                        <option value="{{ c }}">{{ c }}</option>
-                      </sc-for>
-                    </select>
-                  </div>
-                </div>
-              </div>
-              <div style="flex: 1 1 452px; display: flex; flex-direction: column; gap: 4px;">
-                <label style="font-weight: 700; font-size: 18px; line-height: 23px; color: #FEFDFF;">Describing text <span style="font-weight: 400;">(optional)</span></label>
-                <textarea value="{{ form.description }}" onChange="{{ setDescription }}" rows="5" placeholder="We want to create team activities that everyone will enjoy…" style-focus="background: #FEE9D4;" style="padding: 7px 13px; background: #FEFDFF; border: none; border-radius: 5px 20px 5px 5px; font-family: 'Mulish', sans-serif; font-weight: 400; font-size: 16px; line-height: 20px; color: #35273A; width: 100%; height: 145px; resize: vertical;"></textarea>
-              </div>
-            </div>
-
-            <div style="display: flex; flex-direction: row; flex-wrap: wrap; align-items: flex-start; gap: 48px 91px;">
-              <sc-for list="{{ questionFields }}" as="q" hint-placeholder-count="2">
-                <div style="flex: 1 1 429px; max-width: 470px; display: flex; flex-direction: column; align-items: flex-start; gap: 24px;">
-                  <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 8px; width: 100%;">
-                    <div style="display: flex; flex-direction: row; align-items: flex-start; gap: 4px; width: 100%;">
-                      <span style="flex: 1 1 auto; font-weight: 700; font-size: 18px; line-height: 23px; color: #FEFDFF;">{{ q.label }}</span>
-                      <button type="button" onClick="{{ q.toggleEdit }}" title="{{ q.editTitle }}" style="{{ q.editStyle }}">{{ q.editIcon }}</button>
-                      <button type="button" onClick="{{ q.remove }}" title="{{ q.removeTitle }}" style="flex: none; display: flex; align-items: center; justify-content: center; width: 26px; height: 26px; padding: 4px; border: none; cursor: pointer; background: transparent; border-radius: 3px; color: #FFFFFF; font-size: 15px; line-height: 1; transition: background .18s ease, color .18s ease;" style-hover="background: rgba(255,183,112,0.6); color: #35273A;">🗑</button>
-                    </div>
-                    <input value="{{ q.text }}" onChange="{{ q.change }}" readOnly="{{ q.locked }}" placeholder="Choose the activities you prefer" style-focus="background: #FEE9D4;" style="padding: 7px 13px; background: #FEFDFF; border: none; border-radius: 5px 20px 5px 5px; font-family: 'Mulish', sans-serif; font-weight: 400; font-size: 16px; line-height: 20px; color: #35273A; width: 100%;">
-                  </div>
-
-                  <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 16px; width: 100%;">
-                    <div style="display: flex; flex-direction: row; justify-content: space-between; align-items: flex-start; gap: 4px; width: 100%;">
-                      <span style="font-weight: 700; font-size: 18px; line-height: 23px; color: #FEFDFF;">Answers</span>
-                      <span role="button" tabindex="0" onClick="{{ q.toggleMulti }}" style="display: flex; flex-direction: row; align-items: center; gap: 4px; cursor: pointer;">
-                        <span style="display: flex; align-items: center; justify-content: center; width: 21px; height: 21px;">
-                          <span style="{{ q.multiBoxStyle }}"></span>
-                        </span>
-                        <span style="font-weight: 400; font-size: 12px; line-height: 15px; color: #FFFFFF;">Allow multiple answers.</span>
-                      </span>
-                    </div>
-
-                    <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 8px; width: 100%;">
-                      <sc-for list="{{ q.answers }}" as="a" hint-placeholder-count="2">
-                        <div style="display: flex; flex-direction: row; align-items: center; gap: 8px; width: 100%;">
-                          <span style="flex: none; width: 23px; font-weight: 700; font-size: 18px; line-height: 23px; color: #FEFDFF;">{{ a.letter }}</span>
-                          <input value="{{ a.value }}" onChange="{{ a.change }}" placeholder="{{ a.placeholder }}" style-focus="background: #FEE9D4;" style="padding: 7px 13px; background: #FEFDFF; border: none; border-radius: 5px 20px 5px 5px; font-family: 'Mulish', sans-serif; font-weight: 400; font-size: 16px; line-height: 20px; color: #35273A; width: 100%;">
-                          <button type="button" onClick="{{ a.remove }}" title="Delete answer" style="flex: none; display: flex; align-items: center; justify-content: center; width: 26px; height: 26px; padding: 4px; border: none; cursor: pointer; background: transparent; border-radius: 3px; color: #FFFFFF; font-size: 15px; line-height: 1; transition: background .18s ease, color .18s ease;" style-hover="background: rgba(255,183,112,0.6); color: #35273A;">🗑</button>
-                        </div>
-                      </sc-for>
-                    </div>
-
-                    <div style="display: flex; flex-direction: row; align-items: center; gap: 24px; flex-wrap: wrap; padding-left: 26px;">
-                      <button type="button" onClick="{{ q.addAnswer }}" disabled="{{ q.addDisabled }}" style="{{ q.addAnswerStyle }}" style-hover="background: rgba(250,245,254,0.2);">Add answer ⊕</button>
-                      <span style="font-weight: 400; font-size: 12px; line-height: 15px; color: #FFFFFF;">You can add up to 6 answer fields.</span>
-                    </div>
-                  </div>
-                </div>
-              </sc-for>
-            </div>
-
-            <sc-if value="{{ errors.options }}" hint-placeholder-val="{{ false }}">
-              <div style="font-size: 14px; font-weight: 700; color: #FFCFA1;">{{ errors.options }}</div>
-            </sc-if>
-
-            <div style="display: flex; flex-direction: row; align-items: center;">
-              <button type="button" onClick="{{ addQuestion }}" style="display: flex; flex-direction: row; justify-content: center; align-items: center; gap: 10px; padding: 8px 12px; border: none; cursor: pointer; background: rgba(255,183,112,0.3); border-radius: 10px; font-family: 'Nokora', sans-serif; font-weight: 700; font-size: 16px; line-height: 21px; color: #FEFDFF;" style-hover="background: rgba(255,183,112,0.6);">Add next question ⊕</button>
-            </div>
-          </div>
-        </div>
-
-        <button type="button" onClick="{{ submitCreate }}" onMouseEnter="{{ btn.publishEnter }}" onMouseLeave="{{ btn.leave }}" style="{{ btn.publishStyle }}"><span>Publish</span><span style="{{ btn.publishIconStyle }}">✓</span></button>
-      </div>
-    </div>
-  </sc-if>
-</div>
-</x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;liveResults&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;}}">
-const DAY = 86400000;
-
-const CATEGORIES = ["Team activities", "Health & Wellness", "Gaming & Entertainment", "Workplace Culture", "Food & Drinks"];
-
-function seed() {
-  const now = Date.now();
-  const mk = (id, category, title, description, days, questions) => ({
-    id, category, title, description,
-    endsAt: now + days * DAY,
-    submitted: false,
-    questions: questions.map((q, qi) => ({
-      id: id + "q" + qi,
-      text: q[0],
-      multi: q[1],
-      options: q[2].map((o, i) => ({ id: id + "q" + qi + "-" + i, label: o[0], votes: o[1] })),
-      selected: []
-    }))
-  });
-  return [
-    mk(1, "Team activities", "Let’s Plan the Next Team Event Together", "We want to create team activities that everyone will enjoy – share your preferences and ideas in our survey to help us plan better experiences together.", 1, [
-      ["Which date would work best for you?", true, [["19.09.2025, Friday", 27], ["10.10.2025, Friday", 44], ["11.10.2025, Saturday", 3], ["31.10.2025, Friday", 26]]],
-      ["Choose the activities you prefer", true, [["Outdoor adventure like kayaking", 60], ["Office Costume Party", 0], ["Bowling, mini-golf, volleyball", 14], ["Beach party, Music & cocktails", 26], ["Escape room", 0]]],
-      ["What’s most important to you in a team event?", false, [["Team bonding", 44], ["Food and drinks", 3], ["Trying something new", 26], ["Keeping it low-key and stress-free", 27]]],
-      ["How long would you prefer the event to last?", false, [["Half a day", 14], ["Full day", 86], ["Evening only", 0]]]
-    ]),
-    mk(2, "Health & Wellness", "Healthier future: Fit & wellness survey!", "Results feed into next year’s benefits planning – tell us what would actually make a difference to your day.", 2, [
-      ["What wellness perk would you actually use?", true, [["Gym subsidy", 31], ["Yoga at the office", 14], ["Mental health days", 39], ["Standing desks", 9]]],
-      ["How often would you join a weekly session?", false, [["Every week", 22], ["Twice a month", 41], ["Rarely", 17]]]
-    ]),
-    mk(3, "Gaming & Entertainment", "Gaming habits and favorite games!", "A quick look at how the team plays, so we can plan the right kind of game night.", 3, [
-      ["How do you mostly play?", false, [["PC", 42], ["Console", 27], ["Mobile", 19], ["I don’t play", 6]]],
-      ["Which genres should we pick for game night?", true, [["Party games", 51], ["Racing", 24], ["Co-op shooters", 18], ["Puzzle", 12]]]
-    ]),
-    mk(4, "Workplace Culture", "How should we run our weekly sync?", "We currently spend 60 minutes every Monday. Help us find a format that works.", 5, [
-      ["What format works best for the weekly sync?", false, [["Keep 60 min", 5], ["Cut to 30 min", 33], ["Async written update", 21]]],
-      ["Which day suits you best?", false, [["Monday", 28], ["Wednesday", 19], ["Friday", 11]]]
-    ]),
-    mk(5, "Food & Drinks", "Office kitchen restock — what’s missing?", "Tell us what should be on the shopping list from next month on.", 6, [
-      ["What should we add to the kitchen?", true, [["Oat milk", 22], ["Better coffee beans", 40], ["Fresh fruit", 27], ["Sparkling water", 12]]]
-    ]),
-    mk(6, "Team activities", "Summer offsite: city or countryside?", "Two nights, mid-July. Budget is set – the destination is not.", 9, [
-      ["Where should the summer offsite happen?", false, [["City trip", 26], ["Countryside cabin", 34], ["Beach", 18]]],
-      ["What should the evenings look like?", true, [["Shared dinner", 39], ["Free time", 21], ["Organised activity", 14]]]
-    ]),
-    mk(7, "Health & Wellness", "Ergonomics check: how is your setup?", "A short check-in on your workstation so we know where to invest.", -4, [
-      ["How comfortable is your workstation?", false, [["Very comfortable", 12], ["Okay", 29], ["Needs improvement", 34]]]
-    ]),
-    mk(8, "Gaming & Entertainment", "Which game for the next game night?", "Winner was Mario Kart – thanks to everyone who voted.", -9, [
-      ["Pick the game for game night.", false, [["Mario Kart", 38], ["Jackbox", 21], ["Among Us", 14]]]
-    ]),
-    mk(9, "Workplace Culture", "Remote work: how many days per week?", "This poll closed in spring and shaped the current policy.", -21, [
-      ["How many remote days do you prefer?", false, [["1 day", 8], ["2 days", 26], ["3 days", 31], ["Fully remote", 17]]]
-    ]),
-    mk(10, "Food & Drinks", "Christmas dinner venue 2025", "Booking is done – the Italian place won by a clear margin.", -40, [
-      ["Which venue should we book?", false, [["Italian", 24], ["Steakhouse", 11], ["Vegan bistro", 19]]]
-    ])
-  ];
-}
-
-const LETTERS = "ABCDEFGH";
-
-class Component extends DCLogic {
-  state = {
-    surveys: seed(),
-    tab: "active",
-    category: "All",
-    sortOpen: false,
-    detailId: null,
-    showCreate: false,
-    form: { title: "", category: CATEGORIES[0], description: "", deadline: "", questions: [{ text: "", multi: false, answers: ["", ""], editing: true }] },
-    errors: {},
-    heroHover: false,
-    toast: "",
-    toastSurveyId: null,
-    hoverBtn: null,
-    hoverOpt: null,
-    hoverCard: null,
-    isDesktop: true,
-    tick: 0
-  };
-
-  componentDidMount() {
-    this.syncViewport = () => this.setState({ isDesktop: window.innerWidth >= 1024 });
-    this.syncViewport();
-    window.addEventListener("resize", this.syncViewport);
-    if (this.props.liveResults === false) return;
-    this.timer = setInterval(() => {
-      this.setState(s => {
-        const surveys = s.surveys.map(sv => {
-          if (sv.endsAt <= Date.now()) return sv;
-          if (Math.random() > 0.55) return sv;
-          const qi = Math.floor(Math.random() * sv.questions.length);
-          const questions = sv.questions.map((q, k) => {
-            if (k !== qi) return q;
-            const i = Math.floor(Math.random() * q.options.length);
-            return { ...q, options: q.options.map((o, n) => n === i ? { ...o, votes: o.votes + 1 } : o) };
-          });
-          return { ...sv, questions };
-        });
-        return { surveys, tick: s.tick + 1 };
-      });
-    }, 1800);
-  }
-  syncScrollLock() {
-    const locked = !!(this.state.detailId || this.state.showCreate);
-    document.documentElement.style.overflow = locked ? "hidden" : "";
-    document.body.style.overflow = locked ? "hidden" : "";
-  }
-  componentDidUpdate() { this.syncScrollLock(); }
-  componentWillUnmount() {
-    document.documentElement.style.overflow = "";
-    document.body.style.overflow = "";
-    clearInterval(this.timer);
-    clearTimeout(this.toastTimer);
-    window.removeEventListener("resize", this.syncViewport);
-  }
-
-  primaryButtons(st) {
-    const base = on => ({
-      display: "flex", flexDirection: "row", justifyContent: "center", alignItems: "center",
-      gap: 10, padding: "12px 16px", height: 48, border: "none", cursor: "pointer",
-      background: on ? "#FFB770" : "#FFCFA1", borderRadius: 10,
-      fontFamily: "'Nokora', sans-serif", fontWeight: 700, fontSize: 18, lineHeight: "24px", color: "#221227",
-      transition: "background .18s ease"
-    });
-    const icon = on => ({
-      flex: "none", display: "flex", alignItems: "center", justifyContent: "center",
-      boxSizing: "border-box",
-      width: on ? 24 : 0, height: 24, opacity: on ? 1 : 0, overflow: "hidden",
-      border: on ? "2px solid #221227" : "0 solid #221227", borderRadius: "50%",
-      fontFamily: "'Mulish', sans-serif", fontWeight: 500, fontSize: 18, lineHeight: "18px",
-      paddingBottom: on ? 2 : 0, color: "#221227",
-      transition: "width .18s ease, opacity .18s ease"
-    });
-    const k = st.hoverBtn;
-    return {
-      leave: () => this.setState({ hoverBtn: null }),
-      heroEnter: () => this.setState({ hoverBtn: "hero" }),
-      detailEnter: () => this.setState({ hoverBtn: "detail" }),
-      publishEnter: () => this.setState({ hoverBtn: "publish" }),
-      heroStyle: { ...base(k === "hero"), alignSelf: "flex-start", flex: "none" }, heroIconStyle: icon(k === "hero"),
-      detailStyle: { ...base(k === "detail"), flex: "none" }, detailIconStyle: icon(k === "detail"),
-      publishStyle: base(k === "publish"), publishIconStyle: icon(k === "publish")
-    };
-  }
-
-  dismissToast() {
-    clearTimeout(this.toastTimer);
-    this.setState(s => ({ toast: "", detailId: s.toastSurveyId || s.detailId, toastSurveyId: null }));
-  }
-
-  isPast(s) { return s.endsAt <= Date.now(); }
-
-  deadlineLabel(s) {
-    const diff = s.endsAt - Date.now();
-    if (diff <= 0) {
-      const d = Math.max(1, Math.round(-diff / DAY));
-      return d === 1 ? "Ended yesterday" : "Ended " + d + " days ago";
-    }
-    const d = Math.max(1, Math.ceil(diff / DAY));
-    return d === 1 ? "Ends in 1 Day" : "Ends in " + d + " Days";
-  }
-
-  tabStyle(active, hovered) {
-    return {
-      display: "flex", justifyContent: "center", alignItems: "center", padding: "2px 10px",
-      height: 25, border: "none", cursor: "pointer", borderRadius: 20,
-      background: active ? "#FFB770" : (hovered ? "#FFCFA1" : "#FEE9D4"),
-      fontFamily: "'Nokora', sans-serif", fontWeight: 400, fontSize: 16, lineHeight: "21px", color: "#35273A",
-      transition: "background .18s ease"
-    };
-  }
-
-  fieldStyle(err) {
-    return {
-      width: "100%", padding: "7px 13px", background: "#FEFDFF",
-      borderRadius: "5px 20px 5px 5px",
-      border: err ? "2px solid #EE9236" : "none",
-      fontFamily: "'Mulish', sans-serif", fontWeight: 400, fontSize: 16, lineHeight: "20px", color: "#35273A"
-    };
-  }
-
-  patchQuestion(i, patch) {
-    this.setState(s => {
-      const questions = s.form.questions.slice();
-      questions[i] = { ...questions[i], ...patch };
-      return { form: { ...s.form, questions } };
-    });
-  }
-
-  toggleOption(surveyId, questionId, optionId) {
-    this.setState(s => ({
-      surveys: s.surveys.map(sv => {
-        if (sv.id !== surveyId || sv.submitted || this.isPast(sv)) return sv;
-        return {
-          ...sv,
-          questions: sv.questions.map(q => {
-            if (q.id !== questionId) return q;
-            const on = q.selected.indexOf(optionId) !== -1;
-            const selected = on ? q.selected.filter(x => x !== optionId) : (q.multi ? q.selected.concat(optionId) : [optionId]);
-            return { ...q, selected };
-          })
-        };
-      })
-    }));
-  }
-
-  submitSurvey(surveyId) {
-    this.setState(s => ({
-      surveys: s.surveys.map(sv => {
-        if (sv.id !== surveyId || sv.submitted || this.isPast(sv)) return sv;
-        return {
-          ...sv,
-          submitted: true,
-          questions: sv.questions.map(q => ({
-            ...q,
-            options: q.options.map(o => q.selected.indexOf(o.id) !== -1 ? { ...o, votes: o.votes + 1 } : o)
-          }))
-        };
-      })
-    }));
-  }
-
-  setForm(patch) { this.setState(s => ({ form: { ...s.form, ...patch } })); }
-
-  submitCreate() {
-    const f = this.state.form;
-    const errors = {};
-    if (!f.title.trim()) errors.title = "Please enter a survey name.";
-    const qs = f.questions
-      .map(q => ({ text: q.text.trim(), multi: q.multi, answers: q.answers.map(a => a.trim()).filter(Boolean) }))
-      .filter(q => q.text && q.answers.length >= 2);
-    if (!qs.length) errors.options = "Add at least one question with two answers.";
-    if (Object.keys(errors).length) { this.setState({ errors }); return; }
-    const days = f.deadline ? Math.max(0.5, (new Date(f.deadline + "T23:59:59").getTime() - Date.now()) / DAY) : 7;
-    const id = Date.now();
-    const survey = {
-      id, category: f.category, title: f.title.trim(),
-      description: f.description.trim(),
-      endsAt: Date.now() + days * DAY,
-      submitted: false,
-      questions: qs.map((q, qi) => ({
-        id: id + "q" + qi, text: q.text, multi: q.multi,
-        options: q.answers.map((a, i) => ({ id: id + "q" + qi + "-" + i, label: a, votes: 0 })),
-        selected: []
-      }))
-    };
-    clearTimeout(this.toastTimer);
-    this.setState(s => ({
-      surveys: [survey, ...s.surveys], showCreate: false, errors: {}, tab: "active", category: "All", toast: "Your survey is now published", toastSurveyId: id,
-      form: { title: "", category: CATEGORIES[0], description: "", deadline: "", questions: [{ text: "", multi: false, answers: ["", ""], editing: true }] }
-    }));
-  }
-
-  renderVals() {
-    const st = this.state;
-    const all = st.surveys;
-    const active = all.filter(s => !this.isPast(s)).sort((a, b) => a.endsAt - b.endsAt);
-    const past = all.filter(s => this.isPast(s)).sort((a, b) => b.endsAt - a.endsAt);
-    const pool = st.tab === "active" ? active : past;
-    const inCat = st.category === "All" ? pool : pool.filter(s => s.category === st.category);
-    const catsInPool = ["All"].concat(CATEGORIES.filter(c => pool.some(s => s.category === c)));
-
-    const card = sv => {
-      const hov = st.hoverCard === sv.id;
-      return {
-        id: sv.id, category: sv.category, title: sv.title,
-        deadlineLabel: this.deadlineLabel(sv),
-        open: () => this.setState({ detailId: sv.id }),
-        enter: () => this.setState({ hoverCard: sv.id }),
-        leave: () => this.setState({ hoverCard: null }),
-        cardStyle: {
-          cursor: "pointer", display: "flex", flexDirection: "column", alignItems: "center",
-          width: 321, height: 310, padding: "40px 18px",
-          background: hov ? "#F4E9FB" : "#FAF5FE",
-          borderRadius: "0px 80px 0px 0px",
-          transition: "background .18s ease"
-        },
-        badgeStyle: {
-          display: "flex", justifyContent: "center", alignItems: "center",
-          padding: "3px 6px", borderRadius: "0px 14px 0px 0px",
-          background: hov ? "#FFB770" : "#FFCFA1",
-          fontWeight: 500, fontSize: 12, lineHeight: "15px", color: "#35273A",
-          transition: "background .18s ease"
-        }
-      };
-    };
-
-    const d = st.detailId ? all.find(s => s.id === st.detailId) : null;
-    let detail = null;
-    if (d) {
-      const past = this.isPast(d);
-      const locked = past || d.submitted;
-      const anySelected = d.questions.some(q => q.selected.length > 0);
-      const noResults = d.questions.every(q => q.options.every(o => o.votes === 0));
-      const ends = new Date(d.endsAt);
-      const pad = n => (n < 10 ? "0" : "") + n;
-      detail = {
-        id: d.id, title: d.title,
-        description: d.description || "No additional information provided.",
-        statusLabel: past ? "Closed" : "Published",
-        statusStyle: {
-          display: "flex", justifyContent: "center", alignItems: "center",
-          padding: "3px 12px 3px 8px", borderRadius: "0px 14px 0px 0px",
-          background: past ? "#FEE9D4" : "#FFB770",
-          fontWeight: 600, fontSize: 16, lineHeight: "20px", color: "#221227"
-        },
-        endsLabel: (past ? "Ended on " : "Ends on ") + pad(ends.getDate()) + "." + pad(ends.getMonth() + 1) + "." + ends.getFullYear(),
-        categoryLine: "Category: " + d.category,
-        submitLabel: past ? "Survey closed" : (d.submitted ? "Survey completed" : "Complete survey"),
-        submitDisabled: locked || !anySelected,
-        submitStyle: {
-          display: "flex", justifyContent: "flex-end", alignItems: "center", padding: "8px 12px",
-          border: "none", borderRadius: 10,
-          background: locked || !anySelected ? "rgba(255,183,112,0.3)" : "#FFB770",
-          cursor: locked || !anySelected ? "default" : "pointer",
-          opacity: locked || !anySelected ? 0.8 : 1,
-          fontFamily: "'Nokora', sans-serif", fontWeight: 700, fontSize: 16, lineHeight: "21px", color: "#35273A",
-          transition: "background .18s ease"
-        },
-        submit: () => this.submitSurvey(d.id),
-        noResults,
-        resultQuestions: noResults ? [] : d.questions.map((q, qi) => {
-          const total = q.options.reduce((n, o) => n + o.votes, 0) || 1;
-          return {
-            id: q.id,
-            heading: (qi + 1) + ". " + q.text,
-            options: q.options.map((o, i) => {
-              const pct = Math.round((o.votes / total) * 100);
-              return {
-                id: o.id, letter: LETTERS[i], pctLabel: pct + "%",
-                barStyle: {
-                  position: "absolute", left: 0, top: 0, height: 14,
-                  width: pct + "%", minWidth: pct > 0 ? 9 : 0,
-                  background: "#FFB770", borderRadius: "0px 20px 20px 0px",
-                  transition: "width .5s ease"
-                }
-              };
-            })
-          };
-        }),
-        questions: d.questions.map((q, qi) => {
-          const total = q.options.reduce((n, o) => n + o.votes, 0) || 1;
-          return {
-            id: q.id,
-            heading: (qi + 1) + ". " + q.text,
-            multi: q.multi,
-            options: q.options.map((o, i) => {
-              const on = q.selected.indexOf(o.id) !== -1;
-              const pct = Math.round((o.votes / total) * 100);
-              return {
-                id: o.id, label: o.label,
-                letter: LETTERS[i],
-                letterLabel: LETTERS[i] + ".",
-                toggle: () => this.toggleOption(d.id, q.id, o.id),
-                rowStyle: {
-                  display: "flex", flexDirection: "row", alignItems: "flex-start", gap: 16,
-                  width: 291, padding: "0px 4px", borderRadius: 3,
-                  background: !locked && st.hoverOpt === o.id ? "rgba(255,207,161,0.4)" : "transparent",
-                  cursor: locked ? "default" : "pointer",
-                  opacity: locked && !on ? 0.75 : 1,
-                  transition: "background .15s ease"
-                },
-                enter: () => { if (!locked) this.setState({ hoverOpt: o.id }); },
-                leave: () => this.setState({ hoverOpt: null }),
-                boxMark: on ? "✓" : "",
-                boxStyle: (() => {
-                  return {
-                    boxSizing: "border-box", display: "flex", alignItems: "center", justifyContent: "center",
-                    width: 15, height: 15, borderRadius: 3,
-                    border: on ? "1.5px solid #FFB770" : "1.5px solid #35273A",
-                    background: on ? "#FFB770" : "transparent",
-                    color: "#35273A", fontSize: 10, lineHeight: 1,
-                    transition: "background .15s ease, border-color .15s ease"
-                  };
-                })(),
-                pctLabel: pct + "%",
-                barStyle: {
-                  position: "absolute", left: 0, top: 0, height: 14,
-                  width: pct + "%", minWidth: pct > 0 ? 9 : 0,
-                  background: "#FFB770", borderRadius: "0px 20px 20px 0px",
-                  transition: "width .5s ease"
-                }
-              };
-            })
-          };
-        })
-      };
-    }
-
-    return {
-      endingSoon: active.slice(0, 3).map(card),
-      listSurveys: inCat.map(card),
-      listEmpty: inCat.length === 0,
-      activeTabStyle: this.tabStyle(st.tab === "active", st.hoverBtn === "tabActive"),
-      pastTabStyle: this.tabStyle(st.tab === "past", st.hoverBtn === "tabPast"),
-      tabActiveEnter: () => this.setState({ hoverBtn: "tabActive" }),
-      tabPastEnter: () => this.setState({ hoverBtn: "tabPast" }),
-      tabLeave: () => this.setState({ hoverBtn: null }),
-      showActive: () => this.setState({ tab: "active", category: "All", sortOpen: false }),
-      showPast: () => this.setState({ tab: "past", category: "All", sortOpen: false }),
-      sortChosen: st.category === "All" ? "" : st.category,
-      sortTriggerStyle: {
-        display: "flex", justifyContent: "space-between", alignItems: "center", gap: 4,
-        padding: "4px 6px 4px 10px", width: 206, height: 32,
-        background: st.sortOpen || st.category !== "All" ? "rgba(217,217,217,0.12)" : "transparent",
-        border: "none", cursor: "pointer", borderRadius: 6,
-        fontFamily: "'Mulish', sans-serif", fontWeight: 700, fontSize: 18, lineHeight: "23px", color: "#FFFFFF",
-        transition: "background .15s ease"
-      },
-      sortArrowStyle: {
-        fontSize: 12,
-        color: st.sortOpen || st.category !== "All" ? "#FFB770" : "#FFFFFF",
-        transform: st.sortOpen ? "rotate(180deg)" : "rotate(0deg)",
-        transition: "transform .18s ease, color .15s ease"
-      },
-      sortOpen: st.sortOpen,
-      toggleSort: () => this.setState(s => ({ sortOpen: !s.sortOpen })),
-      categoryOptions: catsInPool.map(c => ({
-        label: c === "All" ? "All categories" : c,
-        select: () => this.setState({ category: c, sortOpen: false }),
-        style: {
-          display: "flex", alignItems: "center", textAlign: "left",
-          border: "none", cursor: "pointer", padding: 4, borderRadius: 6, minHeight: 26,
-          background: st.category === c ? "#F4E9FB" : "transparent",
-          fontFamily: "'Mulish', sans-serif", fontWeight: 400, fontSize: 14, lineHeight: "18px",
-          letterSpacing: "0.02em", color: "#35273A", transition: "background .15s ease"
-        },
-        hoverStyle: "background: #F4E9FB;"
-      })),
-      btn: this.primaryButtons(st),
-
-      heroStyle: {
-        display: "block", width: 420, height: 420, objectFit: "contain",
-        position: "relative", zIndex: 1,
-        transformOrigin: "58% 55%"
-      },
-      heroStarStyle: {
-        position: "absolute", zIndex: 2, pointerEvents: "none",
-        left: 51, top: 311, width: 81, height: 78, display: "block",
-        transformOrigin: "43% 43%",
-        zIndex: 3, opacity: 1,
-        transform: st.heroHover ? "scale(1.22)" : "scale(1)",
-        transition: "transform .5s cubic-bezier(.22,.8,.28,1)"
-      },
-      heroQuestionStyle: {
-        position: "absolute", zIndex: 2, pointerEvents: "none",
-        left: 311, top: 10, width: 77, height: 87, display: "block",
-        transformOrigin: "45% 42%",
-        zIndex: 3, opacity: 1,
-        transform: st.heroHover ? "scale(1.22)" : "scale(1)",
-        transition: "transform .5s cubic-bezier(.22,.8,.28,1)"
-      },
-      heroEnter: () => this.setState({ heroHover: true }),
-      heroLeave: () => this.setState({ heroHover: false }),
-      heroBubbleStyle: {
-        position: "absolute", zIndex: 2, pointerEvents: "none",
-        left: -8, top: 52, width: 196, height: 142, display: "block",
-        transformOrigin: "78% 78%",
-        opacity: 1,
-        transform: st.heroHover ? "scale(1) translate(0,0)" : "scale(0.52) translate(48px, 28px)",
-        transition: "transform .5s cubic-bezier(.22,.8,.28,1)"
-      },
-      heroCheckStyle: {
-        position: "absolute", zIndex: 0, pointerEvents: "none",
-        left: 272, top: 262, width: 112, height: 113, display: "block",
-        transformOrigin: "50% 50%",
-        opacity: 1,
-        transform: st.heroHover ? "translateX(46px) scale(1.05)" : "translateX(0) scale(0.78)",
-        transition: "transform .5s cubic-bezier(.22,.8,.28,1)"
-      },
-      toast: st.toast,
-      closeToast: () => this.dismissToast(),
-      detail,
-      closeDetail: () => this.setState({ detailId: null }),
-      stop: e => e.stopPropagation(),
-      showCreate: st.showCreate,
-      openCreate: () => this.setState({ showCreate: true, errors: {} }),
-      closeCreate: () => this.setState({ showCreate: false, errors: {} }),
-      categories: CATEGORIES,
-      form: st.form,
-      errors: st.errors,
-      titleFieldStyle: this.fieldStyle(st.errors.title),
-      setTitle: e => this.setForm({ title: e.target.value }),
-      setCategory: e => this.setForm({ category: e.target.value }),
-      setDescription: e => this.setForm({ description: e.target.value }),
-      setDeadline: e => this.setForm({ deadline: e.target.value }),
-      questionFields: st.form.questions.map((q, qi) => ({
-        id: qi,
-        label: (qi + 1) + ". Question",
-        removeTitle: qi === 0 ? "Clear this question" : "Delete this question",
-        locked: q.editing === false,
-        editIcon: q.editing === false ? "✎" : "✓",
-        editTitle: q.editing === false ? "Edit this question" : "Confirm this question",
-        toggleEdit: () => this.patchQuestion(qi, { editing: q.editing === false }),
-        editStyle: {
-          display: "flex", justifyContent: "center", alignItems: "center",
-          width: 26, height: 26, padding: "0 3px", border: "none", cursor: "pointer",
-          borderRadius: 3,
-          background: q.editing === false ? "transparent" : "#FFCFA1",
-          color: q.editing === false ? "#FEFDFF" : "#35273A",
-          fontSize: 15, lineHeight: 1,
-          transition: "background .18s ease, color .18s ease"
-        },
-        text: q.text,
-        multi: q.multi,
-        multiBoxStyle: {
-          boxSizing: "border-box", width: 15, height: 15, borderRadius: 3,
-          border: "1.5px solid #FFFFFF",
-          background: q.multi ? "#FFB770" : "transparent"
-        },
-        change: e => this.patchQuestion(qi, { text: e.target.value }),
-        toggleMulti: () => this.patchQuestion(qi, { multi: !q.multi }),
-        remove: () => this.setState(s => {
-          if (qi === 0) {
-            const questions = s.form.questions.slice();
-            questions[0] = { ...questions[0], text: "", answers: questions[0].answers.map(() => "") };
-            return { form: { ...s.form, questions } };
-          }
-          return { form: { ...s.form, questions: s.form.questions.filter((_, k) => k !== qi) } };
-        }),
-        addDisabled: q.answers.length >= 6,
-        addAnswerStyle: {
-          display: "flex", flexDirection: "row", justifyContent: "center", alignItems: "center", gap: 4,
-          padding: "8px 12px", border: "none", borderRadius: 10, background: "transparent",
-          borderBottom: "1px solid #FFFFFF",
-          cursor: q.answers.length >= 6 ? "default" : "pointer",
-          opacity: q.answers.length >= 6 ? 0.5 : 1,
-          fontFamily: "'Nokora', sans-serif", fontWeight: 700, fontSize: 16, lineHeight: "21px", color: "#FEFDFF"
-        },
-        addAnswer: () => { if (q.answers.length < 6) this.patchQuestion(qi, { answers: q.answers.concat("") }); },
-        answers: q.answers.map((v, ai) => ({
-          value: v,
-          letter: LETTERS[ai] + ".",
-          placeholder: "Answer " + LETTERS[ai],
-          change: e => {
-            const answers = q.answers.slice();
-            answers[ai] = e.target.value;
-            this.patchQuestion(qi, { answers });
-          },
-          remove: () => this.patchQuestion(qi, { answers: q.answers.length > 2 ? q.answers.filter((_, k) => k !== ai) : q.answers })
-        }))
-      })),
-      addQuestion: () => this.setState(s => ({
-        form: { ...s.form, questions: s.form.questions.concat({ text: "", multi: false, answers: ["", ""], editing: true }) }
-      })),
-      submitCreate: () => this.submitCreate()
-    };
-  }
-}
-</script>
 </body>
+
 </html>
