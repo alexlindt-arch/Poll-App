@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="assets/img/logo.svg" alt="Poll App" width="200">
+<img src="assets/img/logo-orange.svg" alt="Poll App" width="200">
 
 # Poll App
 

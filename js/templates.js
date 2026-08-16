@@ -65,7 +65,7 @@ function detailHeaderTemplate() {
   return `
     <div class="overlay-header">
       <button type="button" class="logo-button" onclick="closeSurvey()" aria-label="Back to overview">
-        <img src="assets/img/logo.svg" alt="Poll App logo" width="119" height="50">
+        <img src="assets/img/logo-dark.svg" alt="Poll App logo" width="119" height="50">
       </button>
       <button type="button" class="btn btn-primary" onclick="openCreateForm()">
         <span>Create survey</span><span class="btn-icon" aria-hidden="true">+</span>
