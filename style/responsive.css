@@ -106,28 +106,120 @@
     border-width: 2px;
   }
 
-  .survey-list,
-  .question-grid {
-    grid-template-columns: 1fr;
+  /* Abstände laut Design: 48px um die Highlights und die Filter,
+     24px vor der Liste, 16px innerhalb der Blöcke. */
+  .surveys {
+    gap: 0;
+  }
+
+  .surveys h2 {
+    font-size: 54px;
+    line-height: 65px;
+  }
+
+  .ending-soon {
+    margin-top: 48px;
+    gap: var(--space-sm);
+  }
+
+  .ending-soon h3 {
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 30px;
+  }
+
+  /* Die Karten liegen in einem horizontalen Scroller, der bis an beide
+     Bildschirmränder reicht. */
+  .ending-soon-list {
+    flex-wrap: nowrap;
+    margin-inline: -16px;
+    padding-inline: 16px;
+    overflow-x: auto;
+    scroll-snap-type: x proximity;
+    scroll-padding-inline: 16px;
+    scrollbar-width: none;
+  }
+
+  .ending-soon-list::-webkit-scrollbar {
+    display: none;
   }
 
   .survey-card {
-    width: 100%;
-    min-height: auto;
+    flex: none;
+    width: 250px;
+    min-height: 233px;
+    padding: var(--space-md) var(--space-sm);
+    scroll-snap-align: start;
   }
 
-  .ending-soon-list {
-    flex-direction: column;
+  .survey-card .card-title {
+    font-weight: 700;
+    line-height: 30px;
   }
 
   .list-controls {
     flex-direction: column;
     align-items: stretch;
+    gap: 48px;
+    margin-top: 48px;
+  }
+
+  .tabs {
+    gap: var(--space-sm);
+  }
+
+  .tab {
+    height: 23px;
+    font-size: 14px;
+    line-height: 19px;
+  }
+
+  .category-filter {
+    align-self: flex-end;
   }
 
   .filter-trigger,
   .filter-menu {
-    width: 100%;
+    width: 206px;
+  }
+
+  .survey-list,
+  .question-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .survey-list,
+  .survey-list-empty {
+    margin-top: var(--space-md);
+  }
+
+  .survey-list {
+    gap: var(--space-sm);
+  }
+
+  .survey-row {
+    justify-content: flex-end;
+    gap: var(--space-xs);
+    min-height: 147px;
+    padding: 12px var(--space-sm);
+    border-radius: var(--radius-sm) 50px var(--radius-sm) var(--radius-sm);
+    background: rgba(217, 217, 217, 0.08);
+  }
+
+  .survey-row .card-category {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 20px;
+    color: var(--color-primary-hover);
+  }
+
+  .survey-row .card-title {
+    font-size: 20px;
+    line-height: 25px;
+  }
+
+  .survey-row .card-deadline {
+    margin-top: var(--space-sm);
   }
 
   .overlay {
@@ -160,10 +252,6 @@
 }
 
 @media (max-width: 400px) {
-  h2 {
-    font-size: 36px;
-  }
-
   .hero h1 {
     font-size: 52px;
     line-height: 44px;
