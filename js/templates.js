@@ -77,7 +77,7 @@ function detailHeaderTemplate() {
         <img src="assets/img/logo-dark.svg" alt="Poll App logo" width="119" height="50">
       </button>
       <button type="button" class="btn btn-primary" onclick="openCreateForm()">
-        <span>Create survey</span><span class="btn-icon" aria-hidden="true">+</span>
+        <span>Create survey</span><span class="btn-icon" aria-hidden="true"></span>
       </button>
     </div>`;
 }
@@ -439,7 +439,7 @@ function answersSectionTemplate(question, index) {
     ${rows}
     <div>
       <button type="button" class="add-answer" ${full ? 'disabled' : ''}
-        onclick="addAnswer(${index})">Add answer &#8853;</button>
+        onclick="addAnswer(${index})">Add answer <span class="icon-add" aria-hidden="true"></span></button>
       <span class="answer-hint">You can add up to ${MAX_ANSWERS} answer fields.</span>
     </div>`;
 }
@@ -469,7 +469,7 @@ function createFooterTemplate() {
   return `
     <div class="create-footer">
       <div>
-        <button type="button" class="btn btn-ghost" onclick="addQuestion()">Add next question &#8853;</button>
+        <button type="button" class="btn btn-ghost" onclick="addQuestion()">Add next question <span class="icon-add" aria-hidden="true"></span></button>
         <p class="form-note">Fields marked with * are required.</p>
       </div>
       ${error ? `<span class="field-error">${error}</span>` : ''}

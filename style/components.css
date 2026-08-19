@@ -22,25 +22,31 @@
   background: var(--color-primary);
 }
 
+/* The plus in a circle from the design file, coloured via the button text. */
+.icon-add {
+  flex: none;
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  background: currentColor;
+  -webkit-mask: url('../assets/img/add-circle.svg') center / contain no-repeat;
+  mask: url('../assets/img/add-circle.svg') center / contain no-repeat;
+}
+
 .btn-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  flex: none;
   width: 0;
   height: 24px;
   opacity: 0;
-  overflow: hidden;
-  border: 0 solid var(--color-bg-deep);
-  border-radius: 50%;
-  font-family: var(--font-body);
-  font-size: 18px;
+  background: currentColor;
+  -webkit-mask: url('../assets/img/add-circle.svg') center / contain no-repeat;
+  mask: url('../assets/img/add-circle.svg') center / contain no-repeat;
   transition: width var(--transition-fast), opacity var(--transition-fast);
 }
 
 .btn:hover .btn-icon {
   width: 24px;
   opacity: 1;
-  border-width: 2px;
 }
 
 .btn-ghost {
