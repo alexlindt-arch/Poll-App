@@ -80,7 +80,7 @@ lassen sich dynamisch hinzufügen und entfernen – bis zu sechs Antworten pro F
 | ✍️ | **Umfrage-Editor** | Overlay-Dialog mit Pflicht- und optionalen Feldern, Validierung und dynamischen Fragen |
 | ☑️ | **Einfach- & Mehrfachauswahl** | Pro Frage einstellbar |
 | 📊 | **Live-Auswertung** | Prozentbalken neben den Fragen, die sich laufend aktualisieren |
-| 📱 | **Responsive** | Breakpoints bei 1024 px, 768 px und 520 px |
+| 📱 | **Responsive** | Breakpoints bei 1024 px, 768 px und 400 px; der Erstellen-Dialog folgt ab 320 px dem Mobil-Design |
 | ⌨️ | **Tastatur & A11y** | Escape schließt Overlays, ARIA-Rollen für Dialoge, Tabs und Live-Region |
 
 <br>
@@ -149,8 +149,8 @@ Das Projekt folgt den Coding-Konventionen der Developer Akademie:
 
 | Regel | Stand |
 |---|---|
-| Funktionen maximal 14 Zeilen | 102 Funktionen, **0 Verstöße** |
-| JSDoc über jeder Funktion | **102 von 102** dokumentiert |
+| Funktionen maximal 14 Zeilen | 106 Funktionen, **0 Verstöße** |
+| JSDoc über jeder Funktion | **106 von 106** dokumentiert |
 | Keine Inline-Styles im HTML | **0** `style`-Attribute |
 | Trennung von HTML, CSS und JS | 1 HTML-Datei, 6 CSS-Dateien, 8 JS-Module |
 | Sprechende Namen, kein `var` | durchgehend `const`/`let`, camelCase |

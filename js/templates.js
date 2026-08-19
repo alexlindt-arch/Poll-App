@@ -1,6 +1,15 @@
 /** Pure functions that turn data into HTML strings. No DOM access here. */
 
 /**
+ * Builds the bin icon of every delete button, taken from the design file.
+ * @returns {string} The icon markup.
+ */
+function deleteIconTemplate() {
+  return `<svg class="bin-icon" viewBox="309.5 402.25 17.34 19.5" width="17" height="20" aria-hidden="true"
+    focusable="false"><path fill="currentColor" d="M312.75 421.75C312.154 421.75 311.644 421.538 311.22 421.114C310.795 420.689 310.583 420.179 310.583 419.583V405.5C310.276 405.5 310.019 405.396 309.811 405.189C309.604 404.981 309.5 404.724 309.5 404.417C309.5 404.11 309.604 403.852 309.811 403.645C310.019 403.437 310.276 403.333 310.583 403.333H314.917C314.917 403.026 315.02 402.769 315.228 402.561C315.436 402.354 315.693 402.25 316 402.25H320.333C320.64 402.25 320.898 402.354 321.105 402.561C321.313 402.769 321.417 403.026 321.417 403.333H325.75C326.057 403.333 326.314 403.437 326.522 403.645C326.73 403.852 326.833 404.11 326.833 404.417C326.833 404.724 326.73 404.981 326.522 405.189C326.314 405.396 326.057 405.5 325.75 405.5V419.583C325.75 420.179 325.538 420.689 325.114 421.114C324.689 421.538 324.179 421.75 323.583 421.75H312.75ZM323.583 405.5H312.75V419.583H323.583V405.5ZM316 417.417C316.307 417.417 316.564 417.313 316.772 417.105C316.98 416.898 317.083 416.64 317.083 416.333V408.75C317.083 408.443 316.98 408.186 316.772 407.978C316.564 407.77 316.307 407.667 316 407.667C315.693 407.667 315.436 407.77 315.228 407.978C315.02 408.186 314.917 408.443 314.917 408.75V416.333C314.917 416.64 315.02 416.898 315.228 417.105C315.436 417.313 315.693 417.417 316 417.417ZM320.333 417.417C320.64 417.417 320.898 417.313 321.105 417.105C321.313 416.898 321.417 416.64 321.417 416.333V408.75C321.417 408.443 321.313 408.186 321.105 407.978C320.898 407.77 320.64 407.667 320.333 407.667C320.026 407.667 319.769 407.77 319.561 407.978C319.354 408.186 319.25 408.443 319.25 408.75V416.333C319.25 416.64 319.354 416.898 319.561 417.105C319.769 417.313 320.026 417.417 320.333 417.417Z"/></svg>`;
+}
+
+/**
  * Converts a zero based index into a letter label.
  * @param {number} index - Position of the option.
  * @returns {string} A letter such as "A".
@@ -231,17 +240,47 @@ function detailTemplate(survey) {
 }
 
 /**
- * Builds the header of the create dialog.
+ * Builds the logo bar above the create dialog, visible on small screens.
  * @returns {string} The header markup.
  */
 function createHeaderTemplate() {
   return `
-    <div class="overlay-header">
-      <div>
+    <div class="overlay-header create-logo-bar">
+      <button type="button" class="logo-button" onclick="closeCreateForm()" aria-label="Back to overview">
+        <img src="assets/img/logo-dark.svg" alt="Poll App logo" width="119" height="50">
+      </button>
+    </div>`;
+}
+
+/**
+ * Builds the draft badge, the headline and the close button of the dialog.
+ * @returns {string} The intro markup.
+ */
+function createIntroTemplate() {
+  return `
+    <div class="create-intro">
+      <div class="create-heading">
         <span class="detail-status detail-status-closed">Draft</span>
         <h3 class="create-title">Create new survey</h3>
       </div>
-      <button type="button" class="btn btn-ghost" onclick="closeCreateForm()">Cancel &#10005;</button>
+      <button type="button" class="btn btn-ghost create-close" aria-label="Close dialog"
+        onclick="closeCreateForm()"><span class="btn-label">Cancel</span> <span aria-hidden="true">&#10005;</span></button>
+    </div>`;
+}
+
+/**
+ * Builds the label row of a form field together with its clear button.
+ * @param {string} id - Id of the input the label belongs to.
+ * @param {string} label - Visible label text including its marker.
+ * @param {string} field - Name of the draft property the button clears.
+ * @returns {string} The label row markup.
+ */
+function fieldHeadTemplate(id, label, field) {
+  return `
+    <div class="field-head">
+      <label for="${id}">${label}</label>
+      <button type="button" class="icon-button field-clear" title="Clear this field"
+        aria-label="Clear this field" onclick="clearDraftField('${field}')">${deleteIconTemplate()}</button>
     </div>`;
 }
 
@@ -263,8 +302,8 @@ function categorySelectOptions() {
 function titleFieldTemplate() {
   const error = formErrors.title;
   return `
-    <div class="form-field${error ? ' has-error' : ''}">
-      <label for="survey-title">Survey name <span class="label-required">*</span></label>
+    <div class="form-field field-title${error ? ' has-error' : ''}">
+      ${fieldHeadTemplate('survey-title', 'Survey name <span class="label-required">*</span>', 'title')}
       <input id="survey-title" type="text" required aria-required="true" value="${escapeHtml(formDraft.title)}"
         placeholder="Let’s Plan the Next Team Event Together" oninput="updateDraftField('title', this.value)">
       ${error ? `<span class="field-error">${error}</span>` : ''}
@@ -277,8 +316,8 @@ function titleFieldTemplate() {
  */
 function deadlineFieldTemplate() {
   return `
-    <div class="form-field">
-      <label for="survey-deadline">Set end date <span class="label-optional">(optional)</span></label>
+    <div class="form-field field-deadline">
+      ${fieldHeadTemplate('survey-deadline', 'Set end date <span class="label-optional">(optional)</span>', 'deadline')}
       <input id="survey-deadline" type="date" value="${formDraft.deadline}"
         oninput="updateDraftField('deadline', this.value)">
     </div>`;
@@ -290,9 +329,12 @@ function deadlineFieldTemplate() {
  */
 function categoryFieldTemplate() {
   return `
-    <div class="form-field">
-      <label for="survey-category">Choose category <span class="label-required">*</span></label>
-      <select id="survey-category" required onchange="updateDraftField('category', this.value)">
+    <div class="form-field field-category">
+      <div class="field-head">
+        <label for="survey-category">Choose category <span class="label-required">*</span></label>
+      </div>
+      <select id="survey-category" required aria-label="Choose category"
+        onchange="updateDraftField('category', this.value)">
         ${categorySelectOptions()}
       </select>
     </div>`;
@@ -313,8 +355,8 @@ function metaFieldsTemplate() {
 function descriptionFieldTemplate() {
   return `
     <div class="form-column">
-      <div class="form-field">
-        <label for="survey-description">Describing text <span class="label-optional">(optional)</span></label>
+      <div class="form-field field-description">
+        ${fieldHeadTemplate('survey-description', 'Describing text <span class="label-optional">(optional)</span>', 'description')}
         <textarea id="survey-description" rows="5" placeholder="We want to create team activities that everyone will enjoy…"
           oninput="updateDraftField('description', this.value)">${escapeHtml(formDraft.description)}</textarea>
       </div>
@@ -335,7 +377,7 @@ function answerRowTemplate(questionIndex, answerIndex, value) {
       <input type="text" value="${escapeHtml(value)}" placeholder="Answer ${getLetter(answerIndex)}"
         aria-label="Answer ${getLetter(answerIndex)}" oninput="updateAnswer(${questionIndex}, ${answerIndex}, this.value)">
       <button type="button" class="icon-button" title="Remove this answer"
-        onclick="removeAnswer(${questionIndex}, ${answerIndex})">&#128465;</button>
+        onclick="removeAnswer(${questionIndex}, ${answerIndex})">${deleteIconTemplate()}</button>
     </div>`;
 }
 
@@ -349,7 +391,7 @@ function questionDraftHeadTemplate(index) {
     <div class="question-block-head">
       <span>${index + 1}. Question <span class="label-required">*</span></span>
       <button type="button" class="icon-button" title="Delete this question"
-        onclick="removeQuestion(${index})">&#128465;</button>
+        onclick="removeQuestion(${index})">${deleteIconTemplate()}</button>
     </div>`;
 }
 
@@ -431,7 +473,18 @@ function createFooterTemplate() {
         <p class="form-note">Fields marked with * are required.</p>
       </div>
       ${error ? `<span class="field-error">${error}</span>` : ''}
-      <button type="submit" class="btn btn-primary">Publish</button>
+      <button type="submit" class="btn btn-primary create-publish-wide">Publish</button>
+    </div>`;
+}
+
+/**
+ * Builds the publish button that sits below the panel on small screens.
+ * @returns {string} The submit markup.
+ */
+function createSubmitTemplate() {
+  return `
+    <div class="create-submit">
+      <button type="submit" class="btn btn-primary">Publish &#10003;</button>
     </div>`;
 }
 
@@ -443,11 +496,11 @@ function createPanelTemplate() {
   const questions = formDraft.questions.map(questionDraftTemplate).join('');
   return `
     <div class="create-panel">
-      <div class="form-grid">
+      <div class="form-grid form-grid-meta">
         <div class="form-column">${titleFieldTemplate()}${metaFieldsTemplate()}</div>
         ${descriptionFieldTemplate()}
       </div>
-      <div class="form-grid">${questions}</div>
+      <div class="form-grid form-grid-questions">${questions}</div>
       ${createFooterTemplate()}
     </div>`;
 }
@@ -460,7 +513,9 @@ function createFormTemplate() {
   return `
     ${createHeaderTemplate()}
     <form class="create-body" novalidate onsubmit="publishSurvey(event)">
+      ${createIntroTemplate()}
       ${createPanelTemplate()}
+      ${createSubmitTemplate()}
     </form>`;
 }
 

@@ -99,7 +99,7 @@ function showToast(message) {
   toast.innerHTML = toastTemplate(message);
   toast.classList.remove('d-none');
   clearTimeout(toastTimerId);
-  toastTimerId = setTimeout(hideToast, 3500);
+  toastTimerId = setTimeout(hideToast, 2500);
 }
 
 /**

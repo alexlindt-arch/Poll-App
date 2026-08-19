@@ -251,6 +251,20 @@
   animation: rise-in 0.24s ease;
 }
 
+/* The logo bar and the extra publish button only show up on small screens. */
+.create-logo-bar,
+.create-submit {
+  display: none;
+}
+
+.create-intro {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 37px;
+}
+
 .create-panel {
   display: flex;
   flex-direction: column;
@@ -284,6 +298,18 @@
   display: flex;
   flex-direction: column;
   gap: 4px;
+}
+
+.field-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 4px;
+}
+
+/* The clear buttons belong to the mobile layout only. */
+.icon-button.field-clear {
+  display: none;
 }
 
 .form-field label {
@@ -396,6 +422,11 @@
   font-size: 15px;
   cursor: pointer;
   transition: background var(--transition-fast), color var(--transition-fast);
+}
+
+.bin-icon {
+  display: block;
+  flex: none;
 }
 
 .icon-button:hover {

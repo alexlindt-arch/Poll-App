@@ -235,30 +235,241 @@
     height: auto;
   }
 
-  .detail-body,
-  .create-body {
+  .detail-body {
     max-width: calc(100% - 32px);
   }
 
-  .detail-title,
-  .create-title {
+  .detail-title {
     font-size: 36px;
   }
 
-  .detail-main,
-  .create-panel {
+  .detail-main {
     padding: var(--space-md);
+  }
+
+  /* Create dialog from 320px up: white page, one dark block, fields stacked.
+     Values from the design at 375px, widths kept fluid so 320px still fits. */
+  .overlay-create {
+    padding: 48px 0 57px;
+    background: var(--color-surface);
+  }
+
+  .create-logo-bar {
+    display: flex;
+    width: 100%;
+    max-width: none;
+    margin: 0 0 54px;
+    padding: 0 16px;
+  }
+
+  .create-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    padding: var(--space-lg) 0;
+    border-radius: var(--radius-sm) 100px var(--radius-sm) var(--radius-sm);
+    background: var(--color-bg);
+  }
+
+  .create-intro {
+    width: 100%;
+    margin: 0;
+    padding: 0 16px;
+  }
+
+  .create-heading {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-sm);
+  }
+
+  .create-title {
+    font-size: 56px;
+    line-height: 42px;
+  }
+
+  .create-close {
+    flex: none;
+  }
+
+  .create-close .btn-label {
+    display: none;
+  }
+
+  .create-panel {
+    width: calc(100% - 32px);
+    gap: 48px;
+    padding: var(--space-lg) 10px;
+    border-radius: var(--radius-sm) 80px var(--radius-sm) var(--radius-sm);
+  }
+
+  /* The wrappers dissolve so all base fields sit in one column in design order:
+     name, category, end date, description. */
+  .form-grid-meta {
+    flex-direction: column;
+    gap: var(--space-xs);
+  }
+
+  .form-grid-meta .form-column,
+  .form-grid-meta .form-row {
+    display: contents;
+  }
+
+  /* Without the wrappers the old side by side basis would become a height. */
+  .form-grid-meta .form-field {
+    flex: none;
+  }
+
+  .field-title {
+    order: 1;
+  }
+
+  .field-category {
+    order: 2;
+  }
+
+  .field-deadline {
+    order: 3;
+  }
+
+  .field-description {
+    order: 4;
+  }
+
+  .icon-button.field-clear {
+    display: flex;
+  }
+
+  .field-head {
+    padding-right: var(--space-sm);
+  }
+
+  /* The category dropdown carries its own label, so the label row can go. */
+  .field-category .field-head {
+    display: none;
+  }
+
+  .field-category select {
+    align-self: flex-start;
+    width: auto;
+    padding: 4px 6px 4px 0;
+    border-radius: 6px;
+    background: transparent;
+    color: var(--color-text-light);
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+  .field-category select option {
+    background: var(--color-surface);
+    color: var(--color-text-dark);
+  }
+
+  .form-field textarea {
+    height: 108px;
+  }
+
+  .form-grid-questions {
+    flex-direction: column;
+    gap: 48px;
+  }
+
+  .question-block {
+    max-width: none;
+  }
+
+  .multi-toggle {
+    font-size: 14px;
+  }
+
+  /* Answer rows become two lines: letter and bin on top, input below. */
+  .answer-row {
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-bottom: var(--space-xs);
+  }
+
+  .answer-row .answer-letter {
+    flex: 1 1 auto;
+    width: auto;
+    font-size: 18px;
+  }
+
+  .answer-row .icon-button {
+    order: 1;
+    margin-right: var(--space-sm);
+  }
+
+  .answer-row input {
+    order: 2;
+    flex: 1 0 100%;
+  }
+
+  .add-answer {
+    padding: 8px 0;
+  }
+
+  .answer-hint,
+  .form-note {
+    display: none;
+  }
+
+  .create-footer {
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-sm);
+  }
+
+  .create-publish-wide {
+    display: none;
+  }
+
+  .create-submit {
+    display: flex;
+    justify-content: center;
+    margin-top: var(--space-sm);
+  }
+
+  /* The confirmation sits at the bottom of the current page, design values. */
+  .toast {
+    left: 16px;
+    right: 16px;
+    bottom: 24px;
+    align-items: flex-start;
+    min-height: 152px;
+    padding: var(--space-md);
+    transform: none;
+    border-radius: var(--radius-sm) var(--radius-sm) 100px var(--radius-sm);
+    background: var(--color-primary-soft);
+    font-family: var(--font-label);
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 28px;
+  }
+
+  .toast span {
+    flex: 1 1 auto;
+    max-width: 230px;
   }
 }
 
 @media (max-width: 400px) {
+  /* Keeps the answers head line on one row on narrow phones. */
+  .multi-toggle {
+    font-size: 12px;
+  }
+
   .hero h1 {
     font-size: 52px;
     line-height: 44px;
   }
 
-  .detail-title,
-  .create-title {
+  .detail-title {
     font-size: 30px;
   }
 }

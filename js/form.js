@@ -45,6 +45,16 @@ function updateDraftField(field, value) {
 }
 
 /**
+ * Empties one of the simple draft fields.
+ * @param {string} field - Name of the draft property.
+ * @returns {void}
+ */
+function clearDraftField(field) {
+  formDraft[field] = '';
+  renderCreateForm();
+}
+
+/**
  * Stores the text of a question.
  * @param {number} index - Position of the question.
  * @param {string} value - The new question text.
@@ -217,5 +227,5 @@ function publishSurvey(event) {
   currentCategory = 'All';
   closeCreateForm();
   renderApp();
-  showToast('Your survey is now published.');
+  showToast('Your survey is now published!');
 }
