@@ -484,7 +484,7 @@ function createFooterTemplate() {
 function createSubmitTemplate() {
   return `
     <div class="create-submit">
-      <button type="submit" class="btn btn-primary">Publish &#10003;</button>
+      <button type="submit" class="btn btn-primary">Publish<span class="btn-check" aria-hidden="true">&#10003;</span></button>
     </div>`;
 }
 

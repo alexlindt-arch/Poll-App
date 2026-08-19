@@ -16,7 +16,7 @@
 }
 
 .overlay-create {
-  background: var(--color-bg);
+  background: var(--color-surface);
 }
 
 .overlay-header {
@@ -244,32 +244,44 @@
   color: var(--color-accent);
 }
 
+/* The dialog is one dark card on a light page, values from the laptop design. */
 .create-body {
   width: 1218px;
   max-width: calc(100% - 48px);
   margin: 0 auto;
+  padding: var(--space-lg);
+  border-radius: var(--radius-sm) 100px var(--radius-sm) var(--radius-sm);
+  background: var(--color-bg);
   animation: rise-in 0.24s ease;
 }
 
 /* The logo bar and the extra publish button only show up on small screens. */
 .create-logo-bar,
-.create-submit {
+.create-publish-wide,
+.btn-check {
   display: none;
+}
+
+/* Publish sits below the panel, at the right edge of the dark card. */
+.create-submit {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: var(--space-md);
 }
 
 .create-intro {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: center;
   gap: 10px;
-  margin-bottom: 37px;
+  margin-bottom: var(--space-md);
 }
 
 .create-panel {
   display: flex;
   flex-direction: column;
-  gap: var(--space-xl);
-  padding: var(--space-lg) 32px;
+  gap: 48px;
+  padding: 32px;
   border-radius: var(--radius-sm) 80px var(--radius-sm) var(--radius-sm);
   background: var(--color-panel);
 }
@@ -307,8 +319,37 @@
   gap: 4px;
 }
 
-/* The clear buttons belong to the mobile layout only. */
+/* Both designs show a bin next to every field label. */
 .icon-button.field-clear {
+  display: flex;
+}
+
+/* The category is a plain dropdown, its label lives in the select. */
+.field-category .field-head {
+  display: none;
+}
+
+.form-field.field-category select {
+  align-self: flex-start;
+  width: auto;
+  padding: 4px 6px 4px 0;
+  border: none;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--color-text-light);
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.form-field.field-category select option {
+  background: var(--color-surface);
+  color: var(--color-text-dark);
+}
+
+/* Neither design marks required fields with a star. */
+.label-required,
+.form-note,
+.answer-hint {
   display: none;
 }
 

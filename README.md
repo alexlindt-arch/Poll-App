@@ -55,7 +55,7 @@ Rechts aktualisieren sich die Ergebnisse in Echtzeit.
 
 ### Umfrage erstellen
 
-Pflichtfelder sind mit `*` markiert und werden validiert. Fragen und Antwortoptionen
+Pflichtfelder werden beim Absenden validiert und melden sich mit Klartext. Fragen und Antwortoptionen
 lassen sich dynamisch hinzufügen und entfernen – bis zu sechs Antworten pro Frage.
 
 <img src="docs/screenshots/03-create-survey.png" alt="Formular zum Anlegen einer neuen Umfrage" width="100%">

@@ -277,6 +277,7 @@
 
   .create-intro {
     width: 100%;
+    align-items: flex-start;
     margin: 0;
     padding: 0 16px;
   }
@@ -341,33 +342,8 @@
     order: 4;
   }
 
-  .icon-button.field-clear {
-    display: flex;
-  }
-
   .field-head {
     padding-right: var(--space-sm);
-  }
-
-  /* The category dropdown carries its own label, so the label row can go. */
-  .field-category .field-head {
-    display: none;
-  }
-
-  .field-category select {
-    align-self: flex-start;
-    width: auto;
-    padding: 4px 6px 4px 0;
-    border-radius: 6px;
-    background: transparent;
-    color: var(--color-text-light);
-    font-size: 18px;
-    font-weight: 700;
-  }
-
-  .field-category select option {
-    background: var(--color-surface);
-    color: var(--color-text-dark);
   }
 
   .form-field textarea {
@@ -414,25 +390,19 @@
     padding: 8px 0;
   }
 
-  .answer-hint,
-  .form-note {
-    display: none;
-  }
-
   .create-footer {
     flex-direction: column;
     align-items: center;
     gap: var(--space-sm);
   }
 
-  .create-publish-wide {
-    display: none;
-  }
-
   .create-submit {
-    display: flex;
     justify-content: center;
     margin-top: var(--space-sm);
+  }
+
+  .btn-check {
+    display: inline;
   }
 
   /* The confirmation sits at the bottom of the current page, design values. */
