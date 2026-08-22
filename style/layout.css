@@ -24,11 +24,13 @@ main {
   gap: var(--space-xxl);
 }
 
+/* From 769px the illustration always sits to the right of the text, both
+   shrink instead of wrapping; below that the hero stacks (see responsive). */
 .hero {
   display: flex;
   align-items: flex-start;
   gap: 32px;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
 }
 
 /* The headline grows with the text column, not with the window, so it stays
