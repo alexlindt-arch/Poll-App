@@ -31,7 +31,15 @@ main {
   flex-wrap: wrap;
 }
 
+/* The headline grows with the text column, not with the window, so it stays
+   large while the hero is one column and shrinks once the image moves beside it. */
+.hero h1 {
+  font-size: clamp(48px, 5vw, 80px);
+  font-size: clamp(48px, 11.5cqi, 88px);
+}
+
 .hero-text {
+  container-type: inline-size;
   flex: 1 1 480px;
   display: flex;
   flex-direction: column;

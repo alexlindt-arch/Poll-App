@@ -1,10 +1,6 @@
 /* Breakpoints: tablet (1024px), mobile (768px) and small phone (400px). */
 
 @media (max-width: 1024px) {
-  h1 {
-    font-size: 48px;
-  }
-
   h2 {
     font-size: 44px;
   }
@@ -71,8 +67,17 @@
 
   .hero h1 {
     order: 1;
-    font-size: 62px;
-    line-height: 50px;
+    font-size: clamp(48px, 16.5vw, 96px);
+    line-height: 0.81;
+  }
+
+  /* Headline in three lines: Collect / Feedback, / Unlock Ideas. */
+  .hero-line {
+    display: block;
+  }
+
+  .hero-break {
+    display: none;
   }
 
   .hero-visual {
@@ -431,11 +436,6 @@
   /* Keeps the answers head line on one row on narrow phones. */
   .multi-toggle {
     font-size: 12px;
-  }
-
-  .hero h1 {
-    font-size: 52px;
-    line-height: 44px;
   }
 
   .detail-title {
