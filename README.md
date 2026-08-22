@@ -10,7 +10,7 @@ Umfragen in Minuten erstellen, teilen und live auswerten – vom Team-Event bis 
 
 <br>
 
-[![Live Demo](https://img.shields.io/badge/Live_Demo-ansehen-FFB770?style=for-the-badge&logoColor=35273A&labelColor=35273A)](https://alexander-lindt.developerakademie.net/)
+[![Live Demo](https://img.shields.io/badge/Live_Demo-ansehen-FFB770?style=for-the-badge&logoColor=35273A&labelColor=35273A)](https://alexander-lindt.developerakademie.net/Poll-App/)
 [![GitHub Pages](https://img.shields.io/badge/GitHub_Pages-Spiegel-35273A?style=for-the-badge&logoColor=FFB770&labelColor=35273A)](https://alexlindt-arch.github.io/Poll-App/)
 
 ![HTML5](https://img.shields.io/badge/HTML5-35273A?style=flat-square&logo=html5&logoColor=FFB770)
