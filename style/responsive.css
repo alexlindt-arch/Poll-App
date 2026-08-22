@@ -359,12 +359,8 @@
   }
 
   .form-grid-questions {
-    flex-direction: column;
+    grid-template-columns: 1fr;
     gap: 48px;
-  }
-
-  .question-block {
-    max-width: none;
   }
 
   .multi-toggle {

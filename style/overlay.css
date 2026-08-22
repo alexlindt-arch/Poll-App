@@ -425,9 +425,19 @@
   flex: 1 1 200px;
 }
 
+/* Two questions side by side when they fit, otherwise one per row over the
+   full width. A lone question at the end also spans the whole row. */
+.form-grid-questions {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 48px var(--space-xl);
+}
+
+.question-block:last-child:nth-child(odd) {
+  grid-column: 1 / -1;
+}
+
 .question-block {
-  flex: 1 1 429px;
-  max-width: 470px;
   display: flex;
   flex-direction: column;
   gap: var(--space-md);
