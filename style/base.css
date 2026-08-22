@@ -86,25 +86,48 @@ a:hover {
   border: 0;
 }
 
+/* Quiet scrollbar: no track stripe, a muted thumb that only gains contrast
+   while the pointer rests on it. */
 html,
 body {
   scrollbar-width: thin;
-  scrollbar-color: var(--color-primary) #bababa;
+  scrollbar-color: rgba(255, 183, 112, 0.4) transparent;
 }
 
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
-
-::-webkit-scrollbar-thumb {
-  background: var(--color-primary);
-  border-radius: var(--radius-md);
+  width: 12px;
+  height: 12px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #bababa;
-  border-radius: var(--radius-md);
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  border: 3px solid transparent;
+  border-radius: 10px;
+  background: rgba(255, 183, 112, 0.4);
+  background-clip: content-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 183, 112, 0.65);
+  background-clip: content-box;
+}
+
+/* The overlays sit on a light page, so their thumb is dark instead. */
+.overlay {
+  scrollbar-color: rgba(53, 39, 58, 0.3) transparent;
+}
+
+.overlay::-webkit-scrollbar-thumb {
+  background: rgba(53, 39, 58, 0.28);
+  background-clip: content-box;
+}
+
+.overlay::-webkit-scrollbar-thumb:hover {
+  background: rgba(53, 39, 58, 0.5);
+  background-clip: content-box;
 }
 
 @keyframes fade-in {
