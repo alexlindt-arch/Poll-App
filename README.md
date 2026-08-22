@@ -10,7 +10,8 @@ Umfragen in Minuten erstellen, teilen und live auswerten – vom Team-Event bis 
 
 <br>
 
-[![Live Demo](https://img.shields.io/badge/Live_Demo-ansehen-FFB770?style=for-the-badge&logoColor=35273A&labelColor=35273A)](https://alexlindt-arch.github.io/Poll-App/)
+[![Live Demo](https://img.shields.io/badge/Live_Demo-ansehen-FFB770?style=for-the-badge&logoColor=35273A&labelColor=35273A)](https://alexander-lindt.developerakademie.net/)
+[![GitHub Pages](https://img.shields.io/badge/GitHub_Pages-Spiegel-35273A?style=for-the-badge&logoColor=FFB770&labelColor=35273A)](https://alexlindt-arch.github.io/Poll-App/)
 
 ![HTML5](https://img.shields.io/badge/HTML5-35273A?style=flat-square&logo=html5&logoColor=FFB770)
 ![CSS3](https://img.shields.io/badge/CSS3-35273A?style=flat-square&logo=css3&logoColor=FFB770)
@@ -47,7 +48,8 @@ laufende/abgeschlossene Umfragen und Kategoriefilter.
 ### Umfrage beantworten – mit Live-Auswertung
 
 Alle Fragen einer Umfrage, je nach Einstellung mit Einfach- oder Mehrfachauswahl.
-Rechts aktualisieren sich die Ergebnisse in Echtzeit.
+Rechts aktualisieren sich die Ergebnisse in Echtzeit. Oben rechts führen der
+„New survey"-Button und das Schließen-Kreuz zurück in den Ablauf.
 
 <img src="docs/screenshots/02-survey-detail.png" alt="Umfrage-Detailansicht mit Live-Ergebnissen" width="100%">
 
@@ -55,8 +57,10 @@ Rechts aktualisieren sich die Ergebnisse in Echtzeit.
 
 ### Umfrage erstellen
 
-Pflichtfelder werden beim Absenden validiert und melden sich mit Klartext. Fragen und Antwortoptionen
+Pflichtfelder sind mit `*` markiert und werden validiert. Fragen und Antwortoptionen
 lassen sich dynamisch hinzufügen und entfernen – bis zu sechs Antworten pro Frage.
+Zwei Fragen stehen nebeneinander, sobald beide genug Platz haben, sonst füllt eine
+Frage die ganze Breite.
 
 <img src="docs/screenshots/03-create-survey.png" alt="Formular zum Anlegen einer neuen Umfrage" width="100%">
 
@@ -64,8 +68,12 @@ lassen sich dynamisch hinzufügen und entfernen – bis zu sechs Antworten pro F
 
 ### Mobil
 
+Eigenes Layout ab 320 px: Startseite mit horizontal schiebbaren Karten und der
+Erstellen-Dialog als dunkler Block auf heller Seite.
+
 <div align="center">
-  <img src="docs/screenshots/04-mobile.png" alt="Mobile Ansicht der Startseite" width="320">
+  <img src="docs/screenshots/04-mobile.png" alt="Mobile Ansicht der Startseite" width="300">
+  <img src="docs/screenshots/05-mobile-create.png" alt="Mobile Ansicht des Erstellen-Dialogs" width="300">
 </div>
 
 <br>
@@ -80,7 +88,8 @@ lassen sich dynamisch hinzufügen und entfernen – bis zu sechs Antworten pro F
 | ✍️ | **Umfrage-Editor** | Overlay-Dialog mit Pflicht- und optionalen Feldern, Validierung und dynamischen Fragen |
 | ☑️ | **Einfach- & Mehrfachauswahl** | Pro Frage einstellbar |
 | 📊 | **Live-Auswertung** | Prozentbalken neben den Fragen, die sich laufend aktualisieren |
-| 📱 | **Responsive** | Breakpoints bei 1024 px, 768 px und 400 px; der Erstellen-Dialog folgt ab 320 px dem Mobil-Design |
+| 📱 | **Responsive** | Zwei ausgearbeitete Layouts: Mobil ab 320 px, Laptop ab 769 px; Überschrift und Spalten wachsen stufenlos mit dem Platz |
+| 🎠 | **Schiebbare Highlights** | Die Karten bleiben immer in einer Reihe und lassen sich seitlich schieben, wenn sie nicht nebeneinander passen |
 | ⌨️ | **Tastatur & A11y** | Escape schließt Overlays, ARIA-Rollen für Dialoge, Tabs und Live-Region |
 
 <br>
@@ -118,7 +127,7 @@ Poll-App/
 │   ├── detail.js           # Detail-Overlay
 │   ├── form.js             # Erstellen-Dialog inkl. Validierung
 │   └── main.js             # Einstiegspunkt, Reiter, Filter, Live-Timer
-├── assets/img/             # Logos, Icons, Hero-Illustration
+├── assets/img/             # Logos, Icons (Papierkorb, Plus), Hero-Illustration
 └── docs/screenshots/       # Screenshots für dieses README
 ```
 
@@ -149,8 +158,8 @@ Das Projekt folgt den Coding-Konventionen der Developer Akademie:
 
 | Regel | Stand |
 |---|---|
-| Funktionen maximal 14 Zeilen | 106 Funktionen, **0 Verstöße** |
-| JSDoc über jeder Funktion | **106 von 106** dokumentiert |
+| Funktionen maximal 14 Zeilen | 108 Funktionen, **0 Verstöße** |
+| JSDoc über jeder Funktion | **108 von 108** dokumentiert |
 | Keine Inline-Styles im HTML | **0** `style`-Attribute |
 | Trennung von HTML, CSS und JS | 1 HTML-Datei, 6 CSS-Dateien, 8 JS-Module |
 | Sprechende Namen, kein `var` | durchgehend `const`/`let`, camelCase |
