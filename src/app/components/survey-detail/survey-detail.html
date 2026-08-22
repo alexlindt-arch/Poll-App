@@ -1,0 +1,71 @@
+<div class="overlay-header">
+  <button type="button" class="logo-button" (click)="close.emit()" aria-label="Back to overview">
+    <img src="assets/img/logo-dark.svg" alt="Poll App logo" width="119" height="50">
+  </button>
+  <div class="overlay-actions">
+    <button type="button" class="btn btn-primary detail-cta" (click)="create.emit()">
+      <span>New survey</span><span class="btn-icon" aria-hidden="true"></span>
+    </button>
+    <button type="button" class="btn btn-ghost overlay-close" aria-label="Back to overview"
+      (click)="close.emit()"><span aria-hidden="true">&#10005;</span></button>
+  </div>
+</div>
+
+<div class="detail-body">
+  <div class="detail-main">
+    <span class="detail-status" [class.detail-status-closed]="past">{{ status }}</span>
+    <div class="detail-meta">
+      <span>{{ endDate }}</span>
+      <span>Category: {{ survey().category }}</span>
+    </div>
+    <h3 class="detail-title">{{ survey().title }}</h3>
+    <p class="detail-description">{{ survey().description }}</p>
+
+    <div class="question-grid">
+      @for (question of survey().questions; track question.id; let index = $index) {
+        <div class="question">
+          <h4 class="question-heading">{{ index + 1 }}. {{ question.text }}</h4>
+          @if (question.multiple) {
+            <p class="question-hint">More than one answer is possible.</p>
+          }
+          <ul class="option-list">
+            @for (option of question.options; track option.id; let position = $index) {
+              <li>
+                <button type="button" class="option-button"
+                  [class.is-selected]="isSelected(question, option)"
+                  [disabled]="locked" (click)="selectOption(question, option)">
+                  <span class="option-box" aria-hidden="true">
+                    @if (isSelected(question, option)) { &#10003; }
+                  </span>
+                  <span><span class="option-letter">{{ letter(position) }}.</span> {{ option.label }}</span>
+                </button>
+              </li>
+            }
+          </ul>
+        </div>
+      }
+    </div>
+
+    <button type="button" class="btn detail-submit" [disabled]="submitDisabled" (click)="submit()">
+      {{ submitLabel }}
+    </button>
+  </div>
+
+  <aside class="detail-results" aria-live="polite">
+    <h3 class="results-headline">Survey results <span class="results-live">{{ liveLabel }}</span></h3>
+    @for (question of survey().questions; track question.id; let index = $index) {
+      <div class="result-question">
+        <h4 class="question-heading">{{ index + 1 }}. {{ question.text }}</h4>
+        @for (option of question.options; track option.id; let position = $index) {
+          <div class="result-row">
+            <span class="option-letter">{{ letter(position) }}</span>
+            <span class="result-track">
+              <span class="result-bar" [style.width.%]="percentage(question, option)"></span>
+            </span>
+            <span class="result-percent">{{ percentage(question, option) }}%</span>
+          </div>
+        }
+      </div>
+    }
+  </aside>
+</div>

@@ -1,0 +1,100 @@
+<header class="page-header">
+  <a href="./" class="logo-link" aria-label="Poll App home">
+    <img src="assets/img/logo-orange.svg" alt="Poll App logo" width="150" height="70">
+  </a>
+</header>
+
+<main>
+  <section class="hero" aria-labelledby="hero-headline">
+    <div class="hero-text">
+      <h1 id="hero-headline"><span class="hero-line">Collect</span> <span class="hero-line">Feedback,</span><br class="hero-break"><span class="hero-line">Unlock Ideas</span></h1>
+      <p>
+        Create and share surveys in minutes &ndash; from team events to workplace culture.
+        Collect opinions, engage your audience, and turn feedback into action.
+      </p>
+      <button type="button" class="btn btn-primary" (click)="openCreateForm()">
+        <span>New survey</span>
+        <span class="btn-icon" aria-hidden="true"></span>
+      </button>
+    </div>
+    <div class="hero-visual">
+      <img class="hero-image" src="assets/img/hero-visual.png"
+        alt="Illustration of a survey on a mobile screen" width="420" height="420">
+      <img class="hero-icon hero-icon-bubble" src="assets/img/typing-bubble.svg" alt="" width="196" height="142">
+      <img class="hero-icon hero-icon-check" src="assets/img/check.svg" alt="" width="112" height="113">
+      <img class="hero-icon hero-icon-star" src="assets/img/star.svg" alt="" width="81" height="78">
+      <img class="hero-icon hero-icon-question" src="assets/img/question-mark.svg" alt="" width="77" height="87">
+    </div>
+  </section>
+
+  <section class="surveys" aria-labelledby="surveys-headline">
+    <h2 id="surveys-headline">Your surveys</h2>
+
+    <section class="ending-soon" aria-labelledby="ending-soon-headline">
+      <h3 id="ending-soon-headline">Ending soon surveys</h3>
+      <div class="ending-soon-list">
+        @for (survey of surveys.endingSoon(); track survey.id) {
+          <app-survey-teaser [survey]="survey" variant="card" (open)="openSurveyById($event)" />
+        }
+      </div>
+    </section>
+
+    <div class="list-controls">
+      <div class="tabs" role="tablist" aria-label="Survey status">
+        <button type="button" class="tab" role="tab"
+          [attr.aria-selected]="surveys.currentTab() === 'active'"
+          (click)="showTab('active')">Active survey</button>
+        <button type="button" class="tab" role="tab"
+          [attr.aria-selected]="surveys.currentTab() === 'past'"
+          (click)="showTab('past')">Past survey</button>
+      </div>
+
+      <div class="category-filter">
+        <button type="button" class="filter-trigger" [attr.aria-expanded]="isMenuOpen()"
+          aria-controls="filter-menu" (click)="toggleCategoryMenu()">
+          <span>{{ filterLabel }}</span>
+          <span class="filter-arrow" aria-hidden="true">&#9662;</span>
+        </button>
+        @if (isMenuOpen()) {
+          <ul id="filter-menu" class="filter-menu" aria-label="Categories">
+            @for (name of surveys.categoriesForTab(); track name) {
+              <li>
+                <button type="button" class="filter-option"
+                  [attr.aria-current]="surveys.currentCategory() === name"
+                  (click)="selectCategory(name)">{{ optionLabel(name) }}</button>
+              </li>
+            }
+          </ul>
+        }
+      </div>
+    </div>
+
+    <div class="survey-list">
+      @for (survey of surveys.visibleSurveys(); track survey.id) {
+        <app-survey-teaser [survey]="survey" variant="row" (open)="openSurveyById($event)" />
+      }
+    </div>
+    @if (surveys.visibleSurveys().length === 0) {
+      <p class="survey-list-empty">No surveys in this category.</p>
+    }
+  </section>
+</main>
+
+@if (openSurvey) {
+  <div class="overlay overlay-detail" role="dialog" aria-modal="true" aria-label="Survey details">
+    <app-survey-detail (close)="closeSurvey()" (create)="openCreateForm()" />
+  </div>
+}
+
+@if (isCreateOpen()) {
+  <div class="overlay overlay-create" role="dialog" aria-modal="true" aria-label="Create a new survey">
+    <app-survey-form (close)="closeCreateForm()" (published)="onPublished($event)" />
+  </div>
+}
+
+@if (toast.message()) {
+  <div class="toast" role="status" aria-live="polite">
+    <span>{{ toast.message() }}</span>
+    <button type="button" class="toast-close" aria-label="Close message" (click)="toast.hide()">&#10005;</button>
+  </div>
+}

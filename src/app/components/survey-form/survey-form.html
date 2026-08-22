@@ -1,0 +1,140 @@
+<div class="overlay-header create-logo-bar">
+  <button type="button" class="logo-button" (click)="close.emit()" aria-label="Back to overview">
+    <img src="assets/img/logo-dark.svg" alt="Poll App logo" width="119" height="50">
+  </button>
+</div>
+
+<form class="create-body" novalidate (ngSubmit)="publish()">
+  <div class="create-intro">
+    <div class="create-heading">
+      <span class="detail-status detail-status-closed">Draft</span>
+      <h3 class="create-title">Create new survey</h3>
+    </div>
+    <button type="button" class="btn btn-ghost create-close" aria-label="Close dialog"
+      (click)="close.emit()"><span class="btn-label">Cancel</span> <span aria-hidden="true">&#10005;</span></button>
+  </div>
+
+  <div class="create-panel">
+    <div class="form-grid form-grid-meta">
+      <div class="form-column">
+        <div class="form-field field-title" [class.has-error]="errors.title">
+          <div class="field-head">
+            <label for="survey-title">Survey name <span class="label-required">*</span></label>
+            <button type="button" class="icon-button field-clear" title="Clear this field"
+              aria-label="Clear this field" (click)="clearField('title')">
+                <app-bin-icon />
+            </button>
+          </div>
+          <input id="survey-title" type="text" required name="title" [(ngModel)]="draft.title"
+            placeholder="Let’s Plan the Next Team Event Together">
+          @if (errors.title) {
+            <span class="field-error">{{ errors.title }}</span>
+          }
+        </div>
+
+        <div class="form-row">
+          <div class="form-field field-deadline">
+            <div class="field-head">
+              <label for="survey-deadline">Set end date <span class="label-optional">(optional)</span></label>
+              <button type="button" class="icon-button field-clear" title="Clear this field"
+                aria-label="Clear this field" (click)="clearField('deadline')">
+                <app-bin-icon />
+              </button>
+            </div>
+            <input id="survey-deadline" type="date" name="deadline" [(ngModel)]="draft.deadline">
+          </div>
+
+          <div class="form-field field-category">
+            <div class="field-head">
+              <label for="survey-category">Choose category <span class="label-required">*</span></label>
+            </div>
+            <select id="survey-category" name="category" required aria-label="Choose category"
+              [(ngModel)]="draft.category">
+              @for (name of categories; track name) {
+                <option [value]="name">{{ name }}</option>
+              }
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-column">
+        <div class="form-field field-description">
+          <div class="field-head">
+            <label for="survey-description">Describing text <span class="label-optional">(optional)</span></label>
+            <button type="button" class="icon-button field-clear" title="Clear this field"
+              aria-label="Clear this field" (click)="clearField('description')">
+                <app-bin-icon />
+            </button>
+          </div>
+          <textarea id="survey-description" rows="5" name="description" [(ngModel)]="draft.description"
+            placeholder="We want to create team activities that everyone will enjoy…"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-grid form-grid-questions">
+      @for (question of draft.questions; track $index; let index = $index) {
+        <div class="question-block">
+          <div class="question-block-head">
+            <span>{{ index + 1 }}. Question <span class="label-required">*</span></span>
+            <button type="button" class="icon-button" title="Delete this question"
+              (click)="removeQuestion(index)">
+                <app-bin-icon />
+            </button>
+          </div>
+
+          <input type="text" required [name]="'question' + index" [(ngModel)]="question.text"
+            [attr.aria-label]="'Question ' + (index + 1)" placeholder="Choose the activities you prefer">
+
+          <div class="answers-head">
+            <span>Answers <span class="label-required">*</span></span>
+            <button type="button" class="multi-toggle" [attr.aria-pressed]="question.multiple"
+              (click)="toggleMultiple(question)">
+              <span class="multi-box" aria-hidden="true"></span>Allow multiple answers.
+            </button>
+          </div>
+
+          @for (answer of question.answers; track trackAnswer($index); let position = $index) {
+            <div class="answer-row">
+              <span class="answer-letter">{{ letter(position) }}.</span>
+              <input type="text" [name]="'answer' + index + '-' + position"
+                [(ngModel)]="question.answers[position]"
+                [attr.aria-label]="'Answer ' + letter(position)"
+                [placeholder]="'Answer ' + letter(position)">
+              <button type="button" class="icon-button" title="Remove this answer"
+                (click)="removeAnswer(question, position)">
+                <app-bin-icon />
+              </button>
+            </div>
+          }
+
+          <div>
+            <button type="button" class="add-answer" [disabled]="question.answers.length >= maxAnswers"
+              (click)="addAnswer(question)">
+              Add answer <span class="icon-add" aria-hidden="true"></span>
+            </button>
+            <span class="answer-hint">You can add up to {{ maxAnswers }} answer fields.</span>
+          </div>
+        </div>
+      }
+    </div>
+
+    <div class="create-footer">
+      <div>
+        <button type="button" class="btn btn-ghost" (click)="addQuestion()">
+          Add next question <span class="icon-add" aria-hidden="true"></span>
+        </button>
+        <p class="form-note">Fields marked with * are required.</p>
+      </div>
+      @if (errors.questions) {
+        <span class="field-error">{{ errors.questions }}</span>
+      }
+      <button type="submit" class="btn btn-primary create-publish-wide">Publish</button>
+    </div>
+  </div>
+
+  <div class="create-submit">
+    <button type="submit" class="btn btn-primary">Publish<span class="btn-check" aria-hidden="true">&#10003;</span></button>
+  </div>
+</form>

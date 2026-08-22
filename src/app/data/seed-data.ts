@@ -1,9 +1,10 @@
 /**
- * Static seed data for the app.
- * `daysLeft` is relative to the current date: a negative value marks a closed survey.
+ * Static seed data of the app.
+ * `daysLeft` is relative to today: a negative value marks a closed survey.
  */
+import { SeedSurvey } from '../models/survey.model';
 
-const CATEGORIES = [
+export const CATEGORIES: string[] = [
   'Team activities',
   'Health & Wellness',
   'Gaming & Entertainment',
@@ -11,12 +12,12 @@ const CATEGORIES = [
   'Food & Drinks'
 ];
 
-const MAX_ANSWERS = 6;
-const MIN_ANSWERS = 2;
-const DAY_IN_MS = 86400000;
-const LIVE_INTERVAL_MS = 1800;
+export const MAX_ANSWERS = 6;
+export const MIN_ANSWERS = 2;
+export const DAY_IN_MS = 86400000;
+export const LIVE_INTERVAL_MS = 1800;
 
-const SEED_SURVEYS = [
+export const SEED_SURVEYS: SeedSurvey[] = [
   {
     category: 'Team activities',
     title: 'Let’s Plan the Next Team Event Together',

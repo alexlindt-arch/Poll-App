@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="assets/img/logo-orange.svg" alt="Poll App" width="200">
+<img src="public/assets/img/logo-orange.svg" alt="Poll App" width="200">
 
 # Poll App
 
@@ -13,10 +13,10 @@ Create, share and evaluate surveys in minutes – from the team event to workpla
 [![Live Demo](https://img.shields.io/badge/Live_Demo-open-FFB770?style=for-the-badge&logoColor=35273A&labelColor=35273A)](https://alexander-lindt.developerakademie.net/Poll-App/)
 [![GitHub Pages](https://img.shields.io/badge/GitHub_Pages-mirror-35273A?style=for-the-badge&logoColor=FFB770&labelColor=35273A)](https://alexlindt-arch.github.io/Poll-App/)
 
-![HTML5](https://img.shields.io/badge/HTML5-35273A?style=flat-square&logo=html5&logoColor=FFB770)
+![Angular](https://img.shields.io/badge/Angular_22-35273A?style=flat-square&logo=angular&logoColor=FFB770)
+![TypeScript](https://img.shields.io/badge/TypeScript-35273A?style=flat-square&logo=typescript&logoColor=FFB770)
 ![CSS3](https://img.shields.io/badge/CSS3-35273A?style=flat-square&logo=css3&logoColor=FFB770)
-![JavaScript](https://img.shields.io/badge/Vanilla_JS-35273A?style=flat-square&logo=javascript&logoColor=FFB770)
-![No framework](https://img.shields.io/badge/no_framework-35273A?style=flat-square&logoColor=FFB770)
+![Signals](https://img.shields.io/badge/signals-35273A?style=flat-square&logoColor=FFB770)
 ![Responsive](https://img.shields.io/badge/responsive-35273A?style=flat-square&logoColor=FFB770)
 
 </div>
@@ -29,8 +29,9 @@ Poll App is a survey platform: users create their own surveys with any number of
 questions and answers, publish them, cast their vote and watch the evaluation as a
 live bar chart right next to the questions.
 
-Built with plain HTML, CSS and JavaScript – no framework, no build step and no
-dependencies. Drop the folder onto a web server and it runs.
+Built with **Angular 22**: standalone components, signals for the state and the new
+control flow in the templates. The design system lives in plain CSS files that are
+loaded globally, so the look is identical across every view.
 
 <br>
 
@@ -98,11 +99,12 @@ sideways and the create dialog as a dark block on a light page.
 
 | Area | Implementation |
 |---|---|
-| Structure | Semantic HTML5, no inline styles |
-| Styling | CSS3 with custom properties, flexbox and grid, split into six files |
-| Logic | Vanilla JavaScript (ES2021), split into eight modules |
-| Rendering | Template functions build HTML strings, `render.js` writes them into the DOM |
-| Dependencies | none – only Google Fonts (Nerko One, Mulish, Nokora) |
+| Framework | Angular 22 with standalone components, no NgModules |
+| State | Signals in `SurveyService`, derived lists via `computed()` |
+| Templates | New control flow (`@if`, `@for`) and semantic HTML without inline styles |
+| Forms | `FormsModule` with `[(ngModel)]` and validation inside the component |
+| Styling | CSS3 with custom properties, flexbox and grid, split into six global files |
+| Dependencies | Angular only – plus Google Fonts (Nerko One, Mulish, Nokora) |
 
 <br>
 
@@ -110,44 +112,42 @@ sideways and the create dialog as a dark block on a light page.
 
 ```
 Poll-App/
-├── index.html              # Semantic skeleton, empty containers for rendering
-├── style/
-│   ├── variables.css       # Design tokens: colours, fonts, spacing
-│   ├── base.css            # Reset, typography, helper classes, keyframes
-│   ├── layout.css          # Header, hero, surveys section
-│   ├── components.css      # Buttons, cards, tabs, filter, toast
-│   ├── overlay.css         # Detail view and create dialog
-│   └── responsive.css      # Breakpoints
-├── js/
-│   ├── data.js             # Constants and seed data
-│   ├── state.js            # State and object factories
-│   ├── surveys.js          # Queries, sorting, evaluation, voting
-│   ├── templates.js        # HTML templates (no DOM access)
-│   ├── render.js           # Writes the start page into the DOM
-│   ├── detail.js           # Detail overlay
-│   ├── form.js             # Create dialog including validation
-│   └── main.js             # Entry point, tabs, filter, live timer
-├── assets/img/             # Logos, icons (bin, plus), hero illustration
-└── docs/screenshots/       # Screenshots for this README
+├── src/
+│   ├── index.html                    # Document shell with fonts and favicon
+│   ├── main.ts                       # Bootstraps the standalone root component
+│   ├── styles.css                    # Pulls the six design files together
+│   ├── styles/                       # variables, base, layout, components,
+│   │                                 # overlay, responsive
+│   └── app/
+│       ├── app.ts / app.html         # Start page, both overlays, toast
+│       ├── models/survey.model.ts    # Interfaces for surveys, questions, draft
+│       ├── data/seed-data.ts         # Categories, constants, sample surveys
+│       ├── services/
+│       │   ├── survey.service.ts     # State, queries, voting, live timer
+│       │   ├── label.service.ts      # Date and deadline texts
+│       │   └── toast.service.ts      # Confirmation message
+│       └── components/
+│           ├── survey-teaser/        # Card and list row in one component
+│           ├── survey-detail/        # Detail overlay with live evaluation
+│           ├── survey-form/          # Create dialog including validation
+│           └── bin-icon/             # Delete icon from the design file
+├── public/assets/img/                # Logos, icons, hero illustration
+└── docs/screenshots/                 # Screenshots for this README
 ```
 
 <br>
 
 ## Running it locally
 
-The app needs an HTTP server because the fonts are loaded from an external domain:
-
 ```bash
 git clone https://github.com/alexlindt-arch/Poll-App.git
 cd Poll-App
-
-# pick one of these:
-python -m http.server 8000
-npx serve .
-php -S localhost:8000
+npm install
+npm start
 ```
 
-Then open `http://localhost:8000` in the browser.
+Then open `http://localhost:4200` in the browser. `npm run build` writes the
+production bundle to `dist/poll-app/browser`.
 
 <br>
 
@@ -157,14 +157,14 @@ The project follows the coding conventions of the Developer Akademie:
 
 | Rule | Status |
 |---|---|
-| Functions of 14 lines at most | 108 functions, **0 violations** |
-| JSDoc above every function | **108 of 108** documented |
-| No inline styles in the HTML | **0** `style` attributes |
-| HTML, CSS and JS kept apart | 1 HTML file, 6 CSS files, 8 JS modules |
-| Meaningful names, no `var` | `const`/`let` throughout, camelCase |
-| No duplication | shared building blocks such as `surveyTeaserTemplate()` |
+| Functions of 14 lines at most | 69 methods, **0 violations** |
+| JSDoc above every method | **69 of 69** documented |
+| No inline styles in the templates | **0** `style` attributes |
+| Templates, styles and logic kept apart | own `.html` file per component, global CSS |
+| Meaningful names, typed throughout | interfaces in `survey.model.ts`, no `any` |
+| No duplication | card and list row share `SurveyTeaser` |
 
-User input is escaped through `escapeHtml()` before it is written into the DOM.
+Angular escapes every interpolated value, so user input can never inject markup.
 
 <br>
 
@@ -197,9 +197,12 @@ User input is escaped through `escapeHtml()` before it is written into the DOM.
 - The surveys are sample data. There is no backend – created surveys and cast votes
   live in the memory of the page and are gone after a reload.
 - The live evaluation simulates incoming votes every couple of seconds so the bars
-  visibly move.
-- The original design export (React via CDN) still lives in the
-  [`design-export`](https://github.com/alexlindt-arch/Poll-App/tree/design-export) branch.
+  visibly move. State changes are applied immutably, which is what makes the
+  zoneless change detection of Angular 22 pick them up.
+- The first implementation in vanilla HTML, CSS and JavaScript is preserved in the
+  [`vanilla-js`](https://github.com/alexlindt-arch/Poll-App/tree/vanilla-js) branch,
+  the original design export (React via CDN) in
+  [`design-export`](https://github.com/alexlindt-arch/Poll-App/tree/design-export).
 
 <br>
 
