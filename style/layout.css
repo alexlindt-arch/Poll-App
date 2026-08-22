@@ -170,10 +170,25 @@ main {
   gap: var(--space-lg);
 }
 
+/* One row at every width: the cards keep their size and scroll sideways
+   instead of wrapping into a second line. */
 .ending-soon-list {
   display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-md);
+  flex-wrap: nowrap;
+  gap: 32px;
+  overflow-x: auto;
+  scroll-snap-type: x proximity;
+  scrollbar-width: none;
+}
+
+.ending-soon-list::-webkit-scrollbar {
+  display: none;
+}
+
+/* The cards keep their width, the row scrolls when they no longer fit. */
+.survey-card {
+  flex: none;
+  scroll-snap-align: start;
 }
 
 .list-controls {
