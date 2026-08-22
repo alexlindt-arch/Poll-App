@@ -139,7 +139,10 @@ Poll-App/
 
 ## Running it locally
 
+Node 22 LTS is expected, the version Angular 22 supports.
+
 ```bash
+node -v          # v22.x
 git clone https://github.com/alexlindt-arch/Poll-App.git
 cd Poll-App
 npm install
