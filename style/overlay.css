@@ -358,9 +358,11 @@
   color: var(--color-text-dark);
 }
 
-/* Neither design marks required fields with a star. */
-.label-required,
-.form-note,
+/* Required fields carry a star, the note below the form explains it. */
+.label-required {
+  color: var(--color-primary);
+}
+
 .answer-hint {
   display: none;
 }

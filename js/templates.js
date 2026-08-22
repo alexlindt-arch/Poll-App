@@ -192,7 +192,7 @@ function resultRowTemplate(question, option, index) {
   return `
     <div class="result-row">
       <span class="option-letter">${getLetter(index)}</span>
-      <span class="result-track"><span class="result-bar" style="width: ${percent}%"></span></span>
+      <span class="result-track"><span class="result-bar" data-percent="${percent}"></span></span>
       <span class="result-percent">${percent}%</span>
     </div>`;
 }

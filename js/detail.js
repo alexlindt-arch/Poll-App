@@ -35,6 +35,17 @@ function renderDetail() {
   }
   overlay.className = 'overlay overlay-detail';
   overlay.innerHTML = detailTemplate(survey);
+  applyResultWidths();
+}
+
+/**
+ * Sets the width of every result bar from its measured percentage.
+ * @returns {void}
+ */
+function applyResultWidths() {
+  document.querySelectorAll('.result-bar').forEach(bar => {
+    bar.style.width = `${bar.dataset.percent}%`;
+  });
 }
 
 /**
@@ -78,4 +89,5 @@ function refreshOpenResults() {
     return;
   }
   slot.innerHTML = detailResultsTemplate(survey);
+  applyResultWidths();
 }
