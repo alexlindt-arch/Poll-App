@@ -74,6 +74,15 @@ a:hover {
   display: none !important;
 }
 
+/* The component hosts must not become the grid or flex items themselves,
+   otherwise the cards inside them shrink to their text width. */
+app-survey-teaser,
+app-survey-detail,
+app-survey-form,
+app-bin-icon {
+  display: contents;
+}
+
 .visually-hidden {
   position: absolute;
   width: 1px;
