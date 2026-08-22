@@ -76,8 +76,13 @@ function detailHeaderTemplate() {
       <button type="button" class="logo-button" onclick="closeSurvey()" aria-label="Back to overview">
         <img src="assets/img/logo-dark.svg" alt="Poll App logo" width="119" height="50">
       </button>
-      <button type="button" class="btn btn-ghost overlay-close" aria-label="Back to overview"
-        onclick="closeSurvey()"><span aria-hidden="true">&#10005;</span></button>
+      <div class="overlay-actions">
+        <button type="button" class="btn btn-primary detail-cta" onclick="openCreateForm()">
+          <span>New survey</span><span class="btn-icon" aria-hidden="true"></span>
+        </button>
+        <button type="button" class="btn btn-ghost overlay-close" aria-label="Back to overview"
+          onclick="closeSurvey()"><span aria-hidden="true">&#10005;</span></button>
+      </div>
     </div>`;
 }
 

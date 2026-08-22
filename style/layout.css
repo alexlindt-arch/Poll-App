@@ -34,29 +34,37 @@ main {
 /* The headline grows with the text column, not with the window, so it stays
    large while the hero is one column and shrinks once the image moves beside it. */
 .hero h1 {
-  font-size: clamp(48px, 5vw, 80px);
-  font-size: clamp(48px, 11.5cqi, 88px);
+  font-size: clamp(48px, 7vw, 100px);
+  font-size: clamp(48px, 14cqi, 100px);
+  line-height: 0.89;
 }
 
 .hero-text {
   container-type: inline-size;
-  flex: 1 1 480px;
+  flex: 1 1 712px;
   display: flex;
   flex-direction: column;
   gap: var(--space-md);
   align-items: flex-start;
-  max-width: 620px;
+  max-width: 712px;
 }
 
 .hero-text p {
-  max-width: 560px;
+  max-width: 666px;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 30px;
+}
+
+.hero-text .btn {
+  margin-top: var(--space-sm);
 }
 
 /* Die Illustration skaliert über prozentuale Positionen mit der Breite mit. */
 .hero-visual {
   position: relative;
-  flex: 0 1 420px;
-  width: 420px;
+  flex: 0 1 426px;
+  width: 426px;
   max-width: 100%;
   aspect-ratio: 1 / 1;
 }
@@ -130,16 +138,36 @@ main {
   }
 }
 
+/* Even 40px between headline block, cards, filter row and list. */
 .surveys {
   display: flex;
   flex-direction: column;
   gap: var(--space-lg);
+  width: 100%;
+  max-width: 1042px;
+  margin-inline: auto;
+}
+
+.surveys h2 {
+  margin-bottom: var(--space-sm);
+  font-size: 72px;
+  line-height: 87px;
 }
 
 .ending-soon {
   display: flex;
   flex-direction: column;
   gap: var(--space-md);
+}
+
+.ending-soon h3 {
+  font-weight: 500;
+  font-size: 32px;
+  line-height: 40px;
+}
+
+.ending-soon {
+  gap: var(--space-lg);
 }
 
 .ending-soon-list {

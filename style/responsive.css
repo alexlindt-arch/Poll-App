@@ -234,6 +234,10 @@
     max-width: calc(100% - 32px);
   }
 
+  .detail-cta {
+    display: none;
+  }
+
   .overlay-header .logo-button img {
     width: 119px;
     height: auto;
